@@ -63,6 +63,43 @@ h1{
     color: white;
     padding: 0.5%;
 }
+/*Erste Planzeile:*/
+#id_calllsign{
+    width: 5%;
+}
+
+/*zweite Planzeile: */
+#id_stand{
+    width: 5%;
+}
+#id_act_rwys{
+    width: 6%;
+}
+#id_ta{
+    width: 5%;
+}
+#id_cruise_fl{
+    width: 5%;
+}
+#id_atis_info_dep{
+    width:5%;
+}
+#id_qnh_dep{
+    width:5%;
+}
+#id_temp_dep{
+    width:5%;
+}
+#id_enroute_time{
+    width:5%;
+}
+#id_pax{
+    width:5%;
+}
+#id_cargo{
+    width:7%;
+}
+
 #id_text_fields input[type=text]{
     border: 2px solid #ccc;
     -webkit-transition: 0.5s;
