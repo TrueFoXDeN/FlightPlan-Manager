@@ -8,7 +8,7 @@ body {
 
 header {
     background-color: #666;
-    padding: 30px;
+    padding: 25px;
     text-align: center;
     font-size: 35px;
     color: white;
@@ -37,7 +37,7 @@ h1 {
 }
 
 #id_headline {
-    padding: 8px;
+
 }
 
 #id_route_input {
@@ -93,7 +93,7 @@ h1 {
 #id_flugplan textarea {
     width: 30%;
     transition: height 0.4s;
-    height: 50px;
+    height: 23px;
 }
 
 #id_flugplan textarea:focus {
