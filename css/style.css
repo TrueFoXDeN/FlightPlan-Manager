@@ -41,32 +41,27 @@ h1 {
 }
 
 #id_route_input{
+    width: 130px;
     padding: 12px 20px 12px 40px;
     font-size: 16px;
     border: 2px solid #ccc;
     border-radius: 4px;
-
+    box-sizing: border-box;
     outline: none;
     background-image: url('../img/search.png');
     background-size: 22px;
     background-position: 10px 11px;
     background-repeat: no-repeat;
     -webkit-transition: width 0.4s ease-in-out;
+    -moz-transition: width 0.4s ease-in-out; /* Firefox 4 */
     transition: width 0.4s ease-in-out;
 }
 
 #id_route_input:focus {
     width: 100%;
     border: 2px solid #555;
-
 }
 
-#id_submit {
-    padding: 0.8% 5%;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-}
 
 #id_flugplan {
     float: left;
@@ -81,6 +76,17 @@ h1 {
 #id_form_plan {
     margin-left: 2%;
     border-style: solid;
+}
+
+#id_text_fields input[type=text] {
+    border: 2px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+#id_text_fields input[type=text]:focus {
+    border: 2px solid #555;
 }
 
 /* Departure Airport section */
@@ -124,19 +130,6 @@ h1 {
 }
 #id_cargo{
     width:7%;
-}
-
-#id_text_fields input[type=text]{
-
-#id_text_fields input[type=text] {
-    border: 2px solid #ccc;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-}
-
-#id_text_fields input[type=text]:focus {
-    border: 2px solid #555;
 }
 
 #id_input_date {
