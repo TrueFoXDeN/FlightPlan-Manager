@@ -1,17 +1,19 @@
-*{
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: Arial, sans-serif;
 }
 
-header{
+header {
     background-color: #666;
     padding: 30px;
     text-align: center;
     font-size: 35px;
     color: white;
 }
+
 nav {
     float: top;
     width: 100%;
@@ -22,29 +24,52 @@ nav {
 
 }
 
-h1{
+h1 {
     text-align: center;
 }
-#id_Suche{
+
+#id_suche {
     float: left;
-    margin-top:1%;
+    margin-top: 1%;
     padding: 1%;
     width: 20%;
     background-color: #f1f1f1;
 }
 
-#Überschrift{
+#id_headline {
     padding: 8px;
 }
-#id_submit{
+
+#id_route_input{
+    padding: 12px 20px 12px 40px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+
+    outline: none;
+    background-image: url('../img/search.png');
+    background-size: 22px;
+    background-position: 10px 11px;
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#id_route_input:focus {
+    width: 100%;
+    border: 2px solid #555;
+
+}
+
+#id_submit {
     padding: 0.8% 5%;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
 }
 
-#id_flugplan{
-    float:left;
+#id_flugplan {
+    float: left;
     width: 79%;
     background-color: #ffffff;
     border-style: double;
@@ -52,27 +77,30 @@ h1{
     margin-top: 1%;
     padding: 30px;
 }
-#id_form_plan{
+
+#id_form_plan {
     margin-left: 2%;
     border-style: solid;
 }
 
 /* Departure Airport section */
-#id_dep_apt_head{
+#id_dep_apt_head {
     background-color: #9c9c9c;
     color: white;
     padding: 0.5%;
 }
-#id_text_fields input[type=text]{
+
+#id_text_fields input[type=text] {
     border: 2px solid #ccc;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
 }
+
 #id_text_fields input[type=text]:focus {
     border: 2px solid #555;
 }
 
-#id_input_date{
+#id_input_date {
 
 }

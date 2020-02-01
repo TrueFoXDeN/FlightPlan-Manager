@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <title>Flugplan</title>
 </head>
 <body>
 
-<div id="Überschrift">
-    <h1>Flugplan-Manager</h1>
+<div id="id_headline">
+    <h1>FlightPlan Manager</h1>
 </div>
 
-<nav>Hier ist die Naviogationsleiste</nav>
+<nav>Hier ist die Navigationsleiste</nav>
 
-<form id="id_Suche">
-    <label>Route:</label>
-    <input type="text" name="route" id="id_route">
+<form id="id_suche">
+
+    <!--<label for="id_route_input">Route: </label>-->
+    <input type="text" id="id_route_input" placeholder="Suche...">
     <input type="button" name="submit" id="id_submit" value="Route suchen">
 </form>
 <div id="id_flugplan">
     <h1 id="id_head_plan">Flugplan</h1>
     <form id="id_form_plan">
         <br>
-        <fieldset id ="id_text_fields">
+        <fieldset id="id_text_fields">
             <legend>Before flight</legend>
             Date: <input type="text" id="id_date">
             ETD: <input type="text">
