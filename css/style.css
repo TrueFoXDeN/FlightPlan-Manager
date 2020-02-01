@@ -41,7 +41,7 @@ h1 {
 }
 
 #id_route_input{
-    width: 130px;
+    width: 180px;
     padding: 12px 20px 12px 40px;
     font-size: 16px;
     border: 2px solid #ccc;
@@ -74,22 +74,35 @@ h1 {
 }
 
 #id_form_plan {
-    margin-left: 2%;
     border-style: solid;
+    border-radius: 10px;
+    background-color: #f5f5f5;
 }
 
-#id_text_fields input[type=text] {
+#id_flugplan input[type=text] {
     border: 2px solid #ccc;
+    border-radius: 4px;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
 }
 
-#id_text_fields input[type=text]:focus {
+#id_flugplan input[type=text]:focus {
     border: 2px solid #555;
 }
 
- /*Before FLight*/
+#id_form_plan fieldset{
+    margin-left: 10px;
+    margin-right: 10px;
+    border:2px solid #666;
+    border-radius: 8px;
+    background-color: #fff;
+}
+#id_fieldset_beforeflight_legend{
+
+}
+
+/* Departure Airport section */
 #id_dep_apt_head {
     background-color: #9c9c9c;
     color: white;

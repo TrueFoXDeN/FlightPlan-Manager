@@ -14,16 +14,14 @@
 <nav>Hier ist die Navigationsleiste</nav>
 
 <form id="id_suche">
-
-    <!--<label for="id_route_input">Route: </label>-->
-    <input type="text" id="id_route_input" placeholder="Suche...">
+    <input type="text" id="id_route_input" placeholder="Route suchen...">
 </form>
 <div id="id_flugplan">
     <h1 id="id_head_plan">Flugplan</h1>
     <form id="id_form_plan">
         <br>
-        <fieldset id="id_text_fields">
-            <legend>Before flight</legend>
+        <fieldset id="id_fieldset_beforeflight">
+            <legend id="id_fieldset_beforeflight_legend">Before flight</legend>
             Date: <input type="text" id="id_date">
             ETD: <input type="text" id="id_etd">
             DEP Apt: <input type="text" id="id_dep_apt">
@@ -109,9 +107,8 @@
             <br><br>
            <textarea id="id_notes_arr" placeholder="Notizen:"></textarea>
 
-
         </fieldset>
-
+        <br>
 
     </form>
 </div>
