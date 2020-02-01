@@ -40,7 +40,7 @@ h1 {
     padding: 8px;
 }
 
-#id_route_input{
+#id_route_input {
     width: 180px;
     padding: 12px 20px 12px 40px;
     font-size: 16px;
@@ -90,14 +90,25 @@ h1 {
     border: 2px solid #555;
 }
 
-#id_form_plan fieldset{
+#id_flugplan textarea {
+    width: 30%;
+    transition: height 0.4s;
+    height: 50px;
+}
+
+#id_flugplan textarea:focus {
+    height: 150px;
+}
+
+#id_form_plan fieldset {
     margin-left: 10px;
     margin-right: 10px;
-    border:2px solid #666;
+    border: 2px solid #666;
     border-radius: 8px;
     background-color: #fff;
 }
-#id_fieldset_beforeflight_legend{
+
+#id_fieldset_beforeflight_legend {
 
 }
 
@@ -107,68 +118,54 @@ h1 {
     color: white;
     padding: 0.5%;
 }
+
 /*Erste Planzeile:*/
-#id_calllsign{
+#id_calllsign {
     width: 5%;
 }
 
 /*zweite Planzeile: */
-#id_stand{
+#id_stand {
     width: 5%;
 }
-#id_act_rwys{
+
+#id_act_rwys {
     width: 6%;
 }
-#id_ta{
+
+#id_ta {
     width: 5%;
 }
-#id_cruise_fl{
+
+#id_cruise_fl {
     width: 5%;
 }
-#id_atis_info_dep{
-    width:5%;
-}
-#id_qnh_dep{
-    width:5%;
-}
-#id_temp_dep{
-    width:5%;
-}
-#id_enroute_time{
-    width:5%;
-}
-#id_pax{
-    width:5%;
-}
-#id_cargo{
-    width:7%;
+
+#id_atis_info_dep {
+    width: 5%;
 }
 
-/*ATC Clearance*/
-#id_further_information{
-   width:30%;
-    min-height: 150px;
-}
-#id_route{
-    width:30%;
-    min-height: 150px;
+#id_qnh_dep {
+    width: 5%;
 }
 
-/*Taxi*/
-#id_taxi_route{
-    width:40%;
-    min-height: 80px;
+#id_temp_dep {
+    width: 5%;
 }
-/*Takeoff*/
-#id_notes_dep{
-    width:40%;
-    min-height: 80px;
+
+#id_enroute_time {
+    width: 5%;
 }
-/*Arrival*/
-#id_notes_arr{
-    width: 40%;
-    min-height: 80px;
+
+#id_pax {
+    width: 5%;
 }
+
+#id_cargo {
+    width: 7%;
+}
+
+
 #id_input_date {
 
 }
