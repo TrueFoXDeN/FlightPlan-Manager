@@ -16,8 +16,8 @@
 
 </header>
 <form id="id_suche">
-    <input type="text" id="id_route_input" onfocusout="setTimeout(function() {showButton(); }, 300)"
-           onfocusin="setTimeout(function() {hideButton(); }, 150)" placeholder="Route suchen...">
+    <input type="text" id="id_route_input" onfocusout="showButton()"
+           onfocusin="hideButton()" placeholder="Route suchen...">
     <button type="button" id="id_create_flightplan">Erstellen</button>
 
 </form>
