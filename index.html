@@ -5,14 +5,16 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <title>Flugplan</title>
 </head>
+
 <body>
+<header>
+    <div class="logo">
+        <img style="vertical-align:middle; background-color: #5f5f5f" width="60px" src="img/flugzeug.png">
+        FlightPlan Manager
+    </div>
 
-<div id="id_headline">
-    <h1>FlightPlan Manager</h1>
-</div>
 
-<nav>Hier ist die Navigationsleiste</nav>
-
+</header>
 <form id="id_suche">
     <input type="text" id="id_route_input" placeholder="Route suchen...">
 </form>
@@ -51,7 +53,6 @@
             Tower Freq: <input type="text" id="id_twr_freq_dep">
 
 
-
         </fieldset>
         <br>
         <fieldset>
@@ -80,7 +81,7 @@
             Radar 2: <input type="text" id="id_rdr_2_freq">
             Radar 3: <input type="text" id="id_rdr_3_freq">
             Radar 4: <input type="text" id="id_rdr_4_freq">
-            <br>  <br>
+            <br> <br>
             <textarea id="id_notes_dep" placeholder="Notizen:"></textarea>
         </fieldset>
         <br>
@@ -99,12 +100,12 @@
             Ground 2: <input type="text" id="id_gnd_2_freq_arr">
             <br><br>
             QNH: <input type="text" id="id_qnh_arr">
-            Active Runways:  <input type="text" id="id_act_rwys_arr">
+            Active Runways: <input type="text" id="id_act_rwys_arr">
             Temp: <input type="text" id="id_temp_arr">
             Transition Level: <input type="text" id="id_tl">
             ATIS Info: <input type="text" id="id_atis_info_arr">
             <br><br>
-           <textarea id="id_notes_arr" placeholder="Notizen:"></textarea>
+            <textarea id="id_notes_arr" placeholder="Notizen:"></textarea>
 
         </fieldset>
         <br>
