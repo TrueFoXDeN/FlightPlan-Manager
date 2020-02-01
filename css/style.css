@@ -89,7 +89,7 @@ h1 {
     border: 2px solid #555;
 }
 
-/* Departure Airport section */
+ /*Before FLight*/
 #id_dep_apt_head {
     background-color: #9c9c9c;
     color: white;
@@ -132,6 +132,31 @@ h1 {
     width:7%;
 }
 
+/*ATC Clearance*/
+#id_further_information{
+   width:30%;
+    min-height: 150px;
+}
+#id_route{
+    width:30%;
+    min-height: 150px;
+}
+
+/*Taxi*/
+#id_taxi_route{
+    width:40%;
+    min-height: 80px;
+}
+/*Takeoff*/
+#id_notes_dep{
+    width:40%;
+    min-height: 80px;
+}
+/*Arrival*/
+#id_notes_arr{
+    width: 40%;
+    min-height: 80px;
+}
 #id_input_date {
 
 }
