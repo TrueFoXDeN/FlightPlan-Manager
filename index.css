@@ -1,0 +1,75 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, sans-serif;
+}
+
+header{
+    background-color: #666;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+}
+nav {
+    float: top;
+    width: 100%;
+    padding: 1%;
+    background: #ccc;
+    border-style: ridge;
+    border-width: medium;
+
+}
+
+h1{
+    text-align: center;
+}
+#id_Suche{
+    float: left;
+    margin-top:1%;
+    padding: 1%;
+    width: 20%;
+    background-color: #f1f1f1;
+}
+
+#Überschrift{
+    padding: 8px;
+}
+#id_submit{
+    padding: 0.8% 5%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#id_flugplan{
+    float:left;
+    width: 79%;
+    background-color: #ffffff;
+    border-style: double;
+    margin-left: 1%;
+    margin-top: 1%;
+    padding: 30px;
+}
+#id_form_plan{
+    margin-left: 2%;
+    border-style: solid;
+}
+
+/* Departure Airport section */
+#id_dep_apt_head{
+    background-color: #9c9c9c;
+    color: white;
+    padding: 0.5%;
+}
+
+#id_date{
+    padding:0.5%;
+    border-style: none;
+    width: 5%;
+    float:top;
+}
+#id_input_date{
+
+}
