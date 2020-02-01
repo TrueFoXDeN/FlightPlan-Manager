@@ -67,10 +67,9 @@ h1 {
     float: left;
     width: 79%;
     background-color: #ffffff;
-    border-style: double;
     margin-left: 1%;
     margin-top: 1%;
-    padding: 30px;
+    padding: 0 20px 20px;
 }
 
 #id_form_plan {
