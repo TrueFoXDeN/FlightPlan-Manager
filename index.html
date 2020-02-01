@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="js/scripts.js"></script>
     <title>Flugplan</title>
 </head>
 
@@ -13,10 +14,12 @@
         FlightPlan Manager
     </div>
 
-
 </header>
 <form id="id_suche">
-    <input type="text" id="id_route_input" placeholder="Route suchen...">
+    <input type="text" id="id_route_input" onfocusout="setTimeout(function() {showButton(); }, 300)"
+           onfocusin="setTimeout(function() {hideButton(); }, 150)" placeholder="Route suchen...">
+    <button type="button" id="id_create_flightplan">Erstellen</button>
+
 </form>
 <div id="id_flugplan">
     <form id="id_form_plan">
