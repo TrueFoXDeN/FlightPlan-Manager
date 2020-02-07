@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="scripts.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 
     <title>Flugplan</title>
 
@@ -11,22 +10,10 @@
 
 <body>
 <?php
-//$host_name = 'db5000286797.hosting-data.io';
-//$database = 'dbs280009';
-//$user_name = 'dbu394562';
-//$password = 'Mastermind1324!';
-//$connect = mysqli_connect($host_name, $user_name, $password, $database);
-
-//$host_name = 'localhost';
-//$database = 'flightplandb';
-//$user_name = 'Christian';
-//$password = 'Mastermind1324';
-//$connect = mysqli_connect($host_name, $user_name, $password, $database);
-
-$host_name = '25.45.252.243:3306';
-$database = 'flightplandb';
-$user_name = 'Laurenz';
-$password = 'Mastermind1324';
+$host_name = 'mysql01.manitu.net:3306';
+$database = 'db42928';
+$user_name = 'u42928';
+$password = 'GaNJGNU9gBkT';
 $connect = mysqli_connect($host_name, $user_name, $password, $database);
 
 
