@@ -25,6 +25,7 @@ if (mysqli_connect_errno()) {
 }
 
 //$DEP = null;
+$Route = null;
 if (isset($_POST['name_departure_input'])) {
     $DEP_temp = $_POST['name_departure_input'];
     $DEP = strtoupper($DEP_temp);
@@ -46,11 +47,9 @@ if (isset($_POST['name_arrival_input'])) {
 
 ?>
 
-
-<iframe src="dbhandler.php" style="display: none"></iframe>
 <header>
     <div class="logo">
-        <img style="vertical-align:middle; background-color: #5f5f5f" width="60px" src="flugzeug.png">
+        <img style="vertical-align:middle; background-color: #5f5f5f" width="60px" src="img/flugzeug.png">
         FlightPlan Manager
     </div>
 
