@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-
     <title>Flugplan</title>
 
 </head>
@@ -20,8 +19,6 @@ $connect = mysqli_connect($host_name, $user_name, $password, $database);
 session_start();
 if (mysqli_connect_errno()) {
     die('<p>Verbindung zum MySQL Server fehlgeschlagen: ' . mysqli_connect_error() . '</p>');
-} else {
-    echo '<p>Verbindung zum MySQL Server erfolgreich aufgebaut.</p >';
 }
 
 //$DEP = null;
@@ -55,9 +52,9 @@ if (isset($_POST['name_arrival_input'])) {
 
 </header>
 <form id="id_suche" method="post">
-    <input type="text" id="id_route_input" name="name_departure_input" placeholder="Departure ICAO">
-    <input type="text" id="id_route_input" name="name_arrival_input" placeholder="Arrival ICAO">
-    <button type="submit" id="id_create_flightplan">Erstellen</button>
+    <input type="text" id="id_route_input_dep" name="name_departure_input" placeholder="Departure ICAO">
+    <input type="text" id="id_route_input_arr" name="name_arrival_input" placeholder="Arrival ICAO">
+    <button type="submit" id="id_create_flightplan">Suchen</button>
 
 </form>
 
@@ -356,7 +353,6 @@ function alternateLaden($DEP, $ARR, $connect){
 
 $connect -> close();
 ?>
-
 
 </body>
 </html>

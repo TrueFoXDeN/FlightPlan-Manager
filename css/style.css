@@ -26,67 +26,60 @@ h1 {
 
 #id_suche {
     float: left;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 10px;
-    padding: 10px 0px 10px 10px;
-    width: 20%;
+    padding: 10px 10px 10px 10px;
+    width: 22%;
 }
+
+#id_suche input[type=text]{
+    padding: 12px 20px 12px 40px;
+    width: 197px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    background-image: url('../img/search.png');
+    background-size: 22px;
+    background-position: 10px 11px;
+    background-repeat: no-repeat;
+}
+#id_suche input[type=text]:focus{
+    border: 2px solid #0c99ff;
+}
+
 #id_create_flightplan{
-    background-color: white;
-    color: black;
-    border: 2px solid #555555;
-    box-shadow: 3px 5px 6px #ccc;
-    padding: 12px 32px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    /*box-shadow: 3px 5px 6px #ccc;*/
+    margin-top: 10px;
+    padding: 10px 15px;
     border-radius: 4px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 5px 0px;
-    -webkit-transition-duration: 0.2s; /* Safari */
-    transition-duration: 0.2s;
+    font-size: 18px;
+    width: 99%;
     cursor: pointer;
-
+    transition: 0.1s;
 }
 #id_create_flightplan:hover{
-    background-color: #555555;
-    color: white;
+    background-color: #0069d9;
 }
 
-#id_headline {
-
+#id_create_flightplan:active{
+    background-color: #0069d9;
+    box-shadow: 0 0 0 2pt #00acff;
 }
-
-#id_route_input {
-    width: 180px;
-    padding: 12px 20px 12px 40px;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    outline: none;
-    background-image: url('search.png');
-    background-size: 22px;
-    background-position: 10px 11px;
-    background-repeat: no-repeat;
-    /*-webkit-transition: width 0.4s ease-in-out;*/
-    /*-moz-transition: width 0.4s ease-in-out; !* Firefox 4 *!*/
-    /*transition: width 0.4s ease-in-out;*/
-}
-
-#id_route_input:focus {
-    /*width: 100%;*/
-    /*border: 2px solid #555;*/
-
-}
-
 
 #id_flugplan {
     float: left;
-    width: 79%;
+    width: 77%;
     background-color: #ffffff;
     margin-top: 1%;
-    padding: 0 20px 20px;
+    padding: 0px 20px 20px 20px;
 }
 
 #id_form_plan {
@@ -98,14 +91,14 @@ h1 {
 #id_flugplan input[type=text] {
     border: 2px solid #ccc;
     margin-right: 10px;
-    border-radius: 4px;
+    border-radius: 3px;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
 }
 
 #id_flugplan input[type=text]:focus {
-    border: 2px solid #555;
+    border: 2px solid #0c99ff;
 }
 
 #id_flugplan textarea {
