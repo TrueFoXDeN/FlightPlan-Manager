@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="calculator.php"></script>
     <title>Flugplan</title>
 
 </head>
@@ -99,12 +100,17 @@ if (isset($_POST['name_arrival_input'])) {
     </div>
 
 </header>
-<form id="id_suche" method="post">
-    <input type="text" id="id_route_input_dep" name="name_departure_input" placeholder="Departure ICAO">
-    <input type="text" id="id_route_input_arr" name="name_arrival_input" placeholder="Arrival ICAO">
-    <button type="submit" id="id_create_flightplan">Suchen</button>
+    <form id="id_suche" method="post">
+        <input type="text" id="id_route_input_dep" name="name_departure_input" placeholder="Departure ICAO">
+        <input type="text" id="id_route_input_arr" name="name_arrival_input" placeholder="Arrival ICAO">
+        <button type="submit" id="id_create_flightplan">Suchen</button>
+        <iframe id="id_calculator_frame" src="calculator.php"></iframe>
+    </form>
 
-</form>
+
+
+
+
 
 <!--Datalists Departure-Frequenzen-->
 <datalist id="list_ground_dep" name="list_ground_dep"></datalist>
@@ -234,6 +240,7 @@ if (isset($_POST['name_arrival_input'])) {
 
     </form>
 </div>
+
 
 <?php
 function sqlAbfrageDeparture($connect, $DEP)
@@ -381,7 +388,7 @@ function sqlAbfrageDeparture($connect, $DEP)
         array_push($ReturnFrequencies, 'Select runway...');
         array_push($ReturnFrequencies, '');
     } else {
-        rray_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, 'Not available');
         array_push($ReturnFrequencies, '');
     }
 
@@ -510,7 +517,7 @@ function sqlAbfrageArrival($connect, $ARR)
         array_push($ReturnFrequencies, 'Select runway...');
         array_push($ReturnFrequencies, '');
     } else {
-        rray_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, 'Not available');
         array_push($ReturnFrequencies, '');
     }
 
