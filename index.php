@@ -23,10 +23,48 @@ if (mysqli_connect_errno()) {
 
 //$DEP = null;
 $Route = null;
+$NoGround_DEP = 'No frequency available';
+$NoAtis_DEP = 'No frequency available';
+$NoDelivery_DEP = 'No frequency available';
+$NoTower_DEP = 'No frequency available';
+$NoApproach_DEP = 'No frequency available';
+$Del_DEP_value = '';
+$Atis_DEP_value = '';
+$Ground_DEP_value = '';
+$Tower_DEP_value = '';
+$Approach_DEP_value = '';
+$NoAtis_ARR = 'No frequency available';
+$NoApproach_ARR = 'No frequency available';
+$NoTower_ARR = 'No frequency available';
+$NoGround_ARR = 'No frequency available';
+$Atis_ARR_value ='';
+$Approach_ARR_value = '';
+$Tower_ARR_value = '';
+$Ground_ARR_value = '';
+$NoRwy_DEP = 'Not available';
+$NoRwy_ARR = 'Not available';
+$Rwy_DEP_value ='';
+$Rwy_ARR_value = '';
+
+$DepartureReturn = array();
+$ArrivalReturn = array();
 if (isset($_POST['name_departure_input'])) {
     $DEP_temp = $_POST['name_departure_input'];
     $DEP = strtoupper($DEP_temp);
-    sqlAbfrageDeparture($connect, $DEP);
+    $DepartureReturn = sqlAbfrageDeparture($connect, $DEP);
+    if (isset($DepartureReturn[0])) {$NoGround_DEP = $DepartureReturn[0];}
+    if (isset($DepartureReturn[1])) {$Ground_DEP_value = $DepartureReturn[1];}
+    if (isset ($DepartureReturn[2])) {$NoAtis_DEP = $DepartureReturn[2];}
+    if (isset ($DepartureReturn[3])) {$Atis_DEP_value = $DepartureReturn[3];}
+    if (isset ($DepartureReturn[4])) {$NoTower_DEP = $DepartureReturn[4];}
+    if (isset ($DepartureReturn[5])) {$Tower_DEP_value = $DepartureReturn[5];}
+    if (isset ($DepartureReturn[6])) {$NoDelivery_DEP = $DepartureReturn[6];}
+    if (isset ($DepartureReturn[7])) {$Del_DEP_value = $DepartureReturn[7];}
+    if (isset ($DepartureReturn[8])) {$NoApproach_DEP = $DepartureReturn[8];}
+    if (isset ($DepartureReturn[9])) {$Approach_DEP_value = $DepartureReturn[9];}
+    if(isset($DepartureReturn[10])){$NoRwy_DEP = $DepartureReturn[10];}
+    if(isset($DepartureReturn[11])){$Rwy_DEP_value = $DepartureReturn[11];}
+
     if (isset($_POST['name_arrival_input'])) {
         $ARR_temp = $_POST['name_arrival_input'];
         $ARR = strtoupper($ARR_temp);
@@ -38,7 +76,17 @@ if (isset($_POST['name_departure_input'])) {
 if (isset($_POST['name_arrival_input'])) {
     $ARR_temp = $_POST['name_arrival_input'];
     $ARR = strtoupper($ARR_temp);
-    sqlAbfrageArrival($connect, $ARR);
+    $ArrivalReturn = sqlAbfrageArrival($connect, $ARR);
+    if(isset($ArrivalReturn[0])){$NoAtis_ARR = $ArrivalReturn[0];}
+    if(isset($ArrivalReturn[1])){$Atis_ARR_value = $ArrivalReturn[1];}
+    if(isset($ArrivalReturn[2])){$NoApproach_ARR = $ArrivalReturn[2];}
+    if(isset($ArrivalReturn[3])){$Approach_ARR_value = $ArrivalReturn[3];}
+    if(isset($ArrivalReturn[4])){$NoTower_ARR = $ArrivalReturn[4];}
+    if(isset($ArrivalReturn[5])){$Tower_ARR_value = $ArrivalReturn[5];}
+    if(isset($ArrivalReturn[6])){$NoGround_ARR = $ArrivalReturn[6];}
+    if(isset($ArrivalReturn[7])){$Ground_ARR_value = $ArrivalReturn[7];}
+    if(isset($ArrivalReturn[8])){$NoRwy_ARR = $ArrivalReturn[8];}
+    if(isset($ArrivalReturn[9])){$Rwy_ARR_value = $ArrivalReturn[9];}
 }
 
 
@@ -63,6 +111,7 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_atis_dep" name="list_atis_dep"></datalist>
 <datalist id="list_tower_dep" name="list_tower_dep"></datalist>
 <datalist id="list_delivery_dep" name="list_delivery_dep"></datalist>
+<datalist id="list_approach_DEP" name="list_approach_DEP"></datalist>
 <!--Departure Runway-->
 <datalist id="list_rwy_dep" name="list_rwy_dep"></datalist>
 
@@ -71,7 +120,7 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_ground_arr" name="list_ground_arr"></datalist>
 <datalist id="list_atis_arr" name="list_atis_arr"></datalist>
 <datalist id="list_tower_arr" name="list_tower_arr"></datalist>
-<datalist id="list_approach_" name="list_approach"></datalist>
+<datalist id="list_approach_arr" name="list_approach_arr"></datalist>
 <!--Arrival Runway-->
 <datalist id="list_rwy_arr" name="list_rwy_arr"></datalist>
 
@@ -104,14 +153,18 @@ if (isset($_POST['name_arrival_input'])) {
             Trip Fuel: <input type="text" id="id_tripfuel" value="<?php echo @$Treibstoff; ?>">
             Fuel hours: <input type="text" id="id_fuel_hours">
             <br><br>
-            ATIS Freq: <input type="text" list="list_atis_dep" id="id_atis_freq_dep" PLACEHOLDER="Select frequency...">
+            ATIS Freq: <input type="text" list="list_atis_dep" id="id_atis_freq_dep"
+                              PLACEHOLDER="<?php echo @$NoAtis_DEP; ?>"
+                              value="<?php echo @$Atis_DEP_value; ?>">
             Delivery Freq: <input type="text" list="list_delivery_dep" id="id_delivery_freq"
-                                  PLACEHOLDER="Select frequency...">
+                                  PLACEHOLDER="<?php echo @$NoDelivery_DEP; ?>" value="<?php echo @$Del_DEP_value; ?>">
             Ground 1 Freq: <input list="list_ground_dep" type="text" id="id_gnd_1_freq_dep"
-                                  PLACEHOLDER="Select frequency...">
+                                  PLACEHOLDER="<?php echo @$NoGround_DEP; ?>" value="<?php echo @$Ground_DEP_value; ?>">
             Ground 2 Freq: <input list="list_ground_dep" type="text" id="id_gnd_2_freq_dep"
-                                  PLACEHOLDER="Select frequency...">
-            Tower Freq: <input type="text" list="list_tower_dep" id="id_twr_freq_dep" PLACEHOLDER="Select frequency...">
+                                  PLACEHOLDER="<?php echo @$NoGround_DEP; ?>" value="<?php echo @$Ground_DEP_value; ?>">
+            Tower Freq: <input type="text" list="list_tower_dep" id="id_twr_freq_dep"
+                               PLACEHOLDER="<?php echo @$NoTower_DEP; ?>"
+                               value="<?php echo @$Tower_DEP_value; ?>">
 
 
         </fieldset>
@@ -119,12 +172,13 @@ if (isset($_POST['name_arrival_input'])) {
         <fieldset>
             <legend>ATC Clearance</legend>
             SID: <input type="text" id="id_sid">
-            RWY: <input type="text" id="id_rwy_takeoff" list="list_rwy_dep">
+            RWY: <input type="text" id="id_rwy_takeoff" list="list_rwy_dep" placeholder="<?php echo@$NoRwy_DEP;?>" value="<?php echo@$Rwy_DEP_value;?>">
             Init CLB: <input type="text" id="id_init_clb">
             Squawk: <input type="text" id="id_squawk">
             <br><br>
             <textarea id="id_further_information" placeholder="Further Information:"></textarea>
-            <textarea id="id_route" name="name_route" placeholder="Route:"><?php echo htmlspecialchars($Route);?></textarea>
+            <textarea id="id_route" name="name_route"
+                      placeholder="Route:"><?php echo htmlspecialchars($Route); ?></textarea>
         </fieldset>
         <br>
         <fieldset>
@@ -137,7 +191,9 @@ if (isset($_POST['name_arrival_input'])) {
         <fieldset>
             <legend>Takeoff</legend>
             Time: <input type="text" id="id_takeoff_time">
-            Approach Freq: <input type="text" id="id_dep_freq" list="list_approach" placeholder="Select frequency...">
+            Approach Freq: <input type="text" id="id_dep_freq" list="list_approach_DEP"
+                                  placeholder="<?php echo @$NoApproach_DEP; ?>"
+                                  value="<?php echo @$Approach_DEP_value; ?>">
             Radar 1: <input type="text" id="id_rdr_1_freq">
             Radar 2: <input type="text" id="id_rdr_2_freq">
             Radar 3: <input type="text" id="id_rdr_3_freq">
@@ -149,19 +205,21 @@ if (isset($_POST['name_arrival_input'])) {
         <fieldset>
             <legend>Descending, landing, taxiing</legend>
             Time: <input type="text" id="id_time_landing">
-            Runway: <input type="text" id="id_rwy_landing">
+            Runway: <input type="text" id="id_rwy_landing" list="list_rwy_arr" placeholder="<?php echo@$NoRwy_ARR;?>" value="<?php echo@$Rwy_ARR_value;?>">
             STAR: <input type="text" id="id_star">
             Approach: <input type="text" id="id_approach">
             Stand: <input type="text" id="id_stand_arr">
             <br><br>
-            ATIS Freq: <input type="text" id="id_atis_freq_arr" list="list_atis_arr" placeholder="Select frequency...">
-            Approach Freq: <input type="text" id="id_app_freq_arr" list="list_approach"
-                                  placeholder="Select frequency...">
-            Tower Freq: <input type="text" id="id_twr_freq_arr" list="list_tower_arr" placeholder="Select frequency...">
+            ATIS Freq: <input type="text" id="id_atis_freq_arr" list="list_atis_arr" placeholder="<?php echo@$NoAtis_ARR;?>"
+            value="<?php echo@$Atis_ARR_value;?>">
+            Approach Freq: <input type="text" id="id_app_freq_arr" list="list_approach_arr"
+                                  placeholder="<?php echo @$NoApproach_ARR;?>" value="<?php echo @$Approach_ARR_value;?>">
+            Tower Freq: <input type="text" id="id_twr_freq_arr" list="list_tower_arr" placeholder="<?php echo @$NoTower_ARR;?>"
+            value="<?php echo @$Tower_ARR_value;?>">
             Ground 1: <input type="text" id="id_gnd_1_freq_arr" list="list_ground_arr"
-                             placeholder="Select frequency...">
+                             placeholder="<?php echo@$NoGround_ARR;?>" value="<?php echo @$Ground_ARR_value;?>">
             Ground 2: <input type="text" id="id_gnd_2_freq_arr" list="list_ground_arr"
-                             placeholder="Select frequency...">
+                             placeholder="<?php echo@$NoGround_ARR;?>" value="<?php echo @$Ground_ARR_value;?>">
             <br><br>
             QNH: <input type="text" id="id_qnh_arr">
             Active Runways: <input type="text" id="id_act_rwys_arr">
@@ -180,134 +238,294 @@ if (isset($_POST['name_arrival_input'])) {
 <?php
 function sqlAbfrageDeparture($connect, $DEP)
 {
-
+    $ReturnFrequencies = array();
     $sql = "SELECT concat(frequenz, ' ',bezeichnung) as ergebnis FROM airports join ground on airports.icao = ground.icao where airports.icao ='$DEP'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_ground_dep'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_ground_dep'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "Ground DEP";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
     $sql = "SELECT concat(frequenz, ' ', bezeichnung) as ergebnis FROM airports join atis a on airports.icao = a.icao where a.icao ='$DEP'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_atis_dep'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_atis_dep'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "atis DEP";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
     $sql = "SELECT concat(frequenz,' ',bezeichnung) as ergebnis FROM airports join tower a on airports.icao = a.icao where a.icao ='$DEP'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_tower_dep'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_tower_dep'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
+
     } else {
-        echo "Tower DEP";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
     $sql = "SELECT concat(frequenz,' ',bezeichnung) as ergebnis FROM airports join delivery a on airports.icao = a.icao where a.icao ='$DEP'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_delivery_dep'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_delivery_dep'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "Delivery";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
+    $sql = "SELECT concat (frequenz, ' ', bezeichnung) as ergebnis FROM airports join approach a on airports.icao = a.icao where a.icao = '$DEP'";
+    $result = $connect->query($sql);
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_approach_DEP'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
+        echo "<datalist id ='list_approach_DEP'>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row['ergebnis'] . ">";
+            echo $row['ergebnis'];
+        }
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
+    } else {
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
+    }
     $sql = "SELECT distinct runways.richtung FROM runways join airport_runway on runways.id  = airport_runway.runway_id join airports on airport_runway.icao = '$DEP'";
-    $result = $connect -> query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    $result = $connect->query($sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
         echo "<datalist id ='list_rwy_dep'>";
-        while($row = $result->fetch_assoc()) {
-            echo "<option value=".$row['richtung'].">";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select runway...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
+        echo "<datalist id ='list_rwy_dep'>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row['richtung'] . ">";
             echo $row['richtung'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select runway...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "0 results";
+        rray_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
+
+
+
+    return $ReturnFrequencies;
 }
 
 
 function sqlAbfrageArrival($connect, $ARR)
 {
+    $ReturnFrequencies = array();
     $sql = "SELECT concat (frequenz, ' ', bezeichnung) as ergebnis FROM airports join atis a on airports.icao = a.icao where a.icao = '$ARR'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_atis_arr'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_atis_arr'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
+
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "atis ARR";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
     $sql = "SELECT concat (frequenz, ' ', bezeichnung) as ergebnis FROM airports join approach a on airports.icao = a.icao where a.icao = '$ARR'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
-        echo "<datalist id ='list_approach'>";
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_approach_arr'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 0) {
+        echo "<datalist id ='list_approach_arr'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "Approach";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
     $sql = "SELECT concat (frequenz, ' ', bezeichnung) as ergebnis FROM airports join tower a on airports.icao = a.icao where a.icao = '$ARR'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_tower_arr'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_tower_arr'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "Tower ARR";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
 
     $sql = "SELECT concat (frequenz, ' ', bezeichnung) as ergebnis FROM airports join ground a on airports.icao = a.icao where a.icao = '$ARR'";
     $result = $connect->query($sql);
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_ground_arr'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_ground_arr'>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row['ergebnis'] . ">";
             echo $row['ergebnis'];
         }
         echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select frequency...');
+        array_push($ReturnFrequencies, '');
     } else {
-        echo "Ground ARR";
+        array_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
     }
+    $sql = "SELECT distinct runways.richtung FROM runways join airport_runway on runways.id  = airport_runway.runway_id join airports on airport_runway.icao = '$ARR'";
+    $result = $connect->query($sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_rwy_arr'>";
+        echo "<option value=" . $row['ergebnis'] . ">";
+        echo $row['ergebnis'];
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select runway...');
+        array_push($ReturnFrequencies, $row['ergebnis']);
+    } else if (mysqli_num_rows($result) > 1) {
+        echo "<datalist id ='list_rwy_arr'>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row['richtung'] . ">";
+            echo $row['richtung'];
+        }
+        echo "</datalist>";
+        array_push($ReturnFrequencies, 'Select runway...');
+        array_push($ReturnFrequencies, '');
+    } else {
+        rray_push($ReturnFrequencies, 'Not available');
+        array_push($ReturnFrequencies, '');
+    }
+
+
+
+
+
+    return $ReturnFrequencies;
 
 }
 
 function routeLaden($DEP, $ARR, $connect)
 {
     $sql = "SELECT route from routen where routen.start_flughafen = '$DEP' AND routen.ziel_flughafen ='$ARR'";
-    $ergebnis= '';
+    $ergebnis = '';
     $result = $connect->query($sql);
     if (mysqli_num_rows($result) > 0) {
 
@@ -319,9 +537,11 @@ function routeLaden($DEP, $ARR, $connect)
         echo "0 results";
     }
 }
-function treibstoffLaden($DEP, $ARR, $connect){
+
+function treibstoffLaden($DEP, $ARR, $connect)
+{
     $sql = "SELECT treibstoff from routen where routen.start_flughafen = '$DEP' AND routen.ziel_flughafen ='$ARR'";
-    $ergebnis= '';
+    $ergebnis = '';
     $result = $connect->query($sql);
     if (mysqli_num_rows($result) > 0) {
 
@@ -332,11 +552,14 @@ function treibstoffLaden($DEP, $ARR, $connect){
     } else {
         echo "0 results";
     }
+
+
 }
 
-function alternateLaden($DEP, $ARR, $connect){
+function alternateLaden($DEP, $ARR, $connect)
+{
     $sql = "SELECT alternativer_flughafen from routen where routen.start_flughafen = '$DEP' AND routen.ziel_flughafen ='$ARR'";
-    $ergebnis= '';
+    $ergebnis = '';
     $result = $connect->query($sql);
     if (mysqli_num_rows($result) > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -351,7 +574,7 @@ function alternateLaden($DEP, $ARR, $connect){
 }
 
 
-$connect -> close();
+$connect->close();
 ?>
 
 </body>
