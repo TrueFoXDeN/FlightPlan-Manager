@@ -8,6 +8,7 @@
 
 <body>
 <?php
+
 $Block_fuel_calc = '0 kg';
 $Zfw = '41000 kg';
 $Tow = '41000kg';
@@ -16,7 +17,7 @@ $block_fuel = '';
 $pax = '';
 $cargo_input = '';
 $Ergebnis = array();
-
+echo 'Test';
 if(isset($_POST['block_fuel_input'])&&isset($_POST['pax_input'])&&isset($_POST['cargo_input'])){
     $block_fuel = $_POST['block_fuel_input'];
     $pax = $_POST['pax_input'];
