@@ -641,16 +641,19 @@ return $ReturnSid;
 
 }
 
-function starLaden ($Route, $ARR, $connect){
+function starLaden($Route, $ARR, $connect)
+{
+    $Route = trim($Route);
     $lastWp = '';
     $waypoints = explode(" ", $Route);
 //    echo $waypoints[7];
 //    $lastWp = end($waypoints);
+
     $lastElement = count($waypoints);
-    $lastElement = $lastElement-2;
+    $lastElement = $lastElement-1;
     $lastWp = $waypoints[$lastElement];
     $sql = "SELECT distinct name from star where star.wegpunkt ='$lastWp' and star.icao = '$ARR'";
-
+    echo $lastWp;
     $ReturnStar= array();
     $result = $connect->query($sql);
     if (mysqli_num_rows($result) == 1) {
