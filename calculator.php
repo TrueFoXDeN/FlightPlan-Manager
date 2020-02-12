@@ -40,6 +40,9 @@ if(isset($_POST['block_fuel_input'])&&isset($_POST['pax_input'])&&isset($_POST['
     Cargo (Kg): <input type="text" style="margin-left: 35px;" name="cargo_input" placeholder="0 kg"><br><br>
     <input type="submit" value="Submit" style="alignment: center">
     <hr>
+
+</form>
+<form action="index.php" method="post">
     <label>Block Fuel:</label>
     <label><?php echo htmlspecialchars($Block_fuel_calc); ?></label><br><br>
     <label>ZFW:</label>

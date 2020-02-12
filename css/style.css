@@ -77,7 +77,7 @@ h1 {
     margin-top:30px;
     padding:5px;
     width: 100%;
-    min-height: 500px;
+    min-height: 410px;
 }
 
 #id_flugplan {
@@ -137,6 +137,9 @@ h1 {
 }
 
 /*Erste Planzeile:*/
+#id_dep_apt{
+    width:5%;
+}
 #id_calllsign {
     width: 5%;
 }

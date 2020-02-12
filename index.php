@@ -46,9 +46,15 @@ $NoRwy_DEP = 'Not available';
 $NoRwy_ARR = 'Not available';
 $Rwy_DEP_value ='';
 $Rwy_ARR_value = '';
+$NoSid = 'Not available';
+$Sid_value = '';
+$NoStar = 'Not available';
+$Star_value = '';
 
 $DepartureReturn = array();
 $ArrivalReturn = array();
+$SidReturn = array();
+$StarReturn = array();
 if (isset($_POST['name_departure_input'])) {
     $DEP_temp = $_POST['name_departure_input'];
     $DEP = strtoupper($DEP_temp);
@@ -72,6 +78,13 @@ if (isset($_POST['name_departure_input'])) {
         $Route = routeLaden($DEP, $ARR, $connect);
         $Treibstoff = treibstoffLaden($DEP, $ARR, $connect);
         $Alternate = alternateLaden($DEP, $ARR, $connect);
+        $SidReturn = sidLaden($Route,$DEP, $connect);
+        $StarReturn = starLaden($Route, $ARR, $connect);
+        if(isset($SidReturn[0])){$NoSid=$SidReturn[0];}
+        if(isset($SidReturn[1])){$Sid_value=$SidReturn[1];}
+        if(isset($StarReturn[0])){$NoStar = $StarReturn[0];}
+        if(isset($StarReturn[1])){$Star_value = $StarReturn[1];}
+
     }
 }
 if (isset($_POST['name_arrival_input'])) {
@@ -100,12 +113,19 @@ if (isset($_POST['name_arrival_input'])) {
     </div>
 
 </header>
+<div id="div_links">
     <form id="id_suche" method="post">
         <input type="text" id="id_route_input_dep" name="name_departure_input" placeholder="Departure ICAO">
         <input type="text" id="id_route_input_arr" name="name_arrival_input" placeholder="Arrival ICAO">
         <button type="submit" id="id_create_flightplan">Suchen</button>
+        <br>
         <iframe id="id_calculator_frame" src="calculator.php"></iframe>
     </form>
+
+
+
+</div>
+
 
 
 
@@ -129,7 +149,9 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_approach_arr" name="list_approach_arr"></datalist>
 <!--Arrival Runway-->
 <datalist id="list_rwy_arr" name="list_rwy_arr"></datalist>
-
+<!--SID & STAR-->
+<datalist id="list_sid" name="list_sid"></datalist>
+<datalist id="list_star" name="list_star"></datalist>
 
 <div id="id_flugplan">
     <form id="id_form_plan">
@@ -177,7 +199,7 @@ if (isset($_POST['name_arrival_input'])) {
         <br>
         <fieldset>
             <legend>ATC Clearance</legend>
-            SID: <input type="text" id="id_sid">
+            SID: <input type="text" id="id_sid" list="list_sid" placeholder="<?php echo@$NoSid;?>" value="<?php echo@$Sid_value;?>">
             RWY: <input type="text" id="id_rwy_takeoff" list="list_rwy_dep" placeholder="<?php echo@$NoRwy_DEP;?>" value="<?php echo@$Rwy_DEP_value;?>">
             Init CLB: <input type="text" id="id_init_clb">
             Squawk: <input type="text" id="id_squawk">
@@ -212,7 +234,7 @@ if (isset($_POST['name_arrival_input'])) {
             <legend>Descending, landing, taxiing</legend>
             Time: <input type="text" id="id_time_landing">
             Runway: <input type="text" id="id_rwy_landing" list="list_rwy_arr" placeholder="<?php echo@$NoRwy_ARR;?>" value="<?php echo@$Rwy_ARR_value;?>">
-            STAR: <input type="text" id="id_star">
+            STAR: <input type="text" id="id_star" list="list_star" placeholder="<?php echo@$NoStar;?>" value="<?php echo@$Star_value;?>">
             Approach: <input type="text" id="id_approach">
             Stand: <input type="text" id="id_stand_arr">
             <br><br>
@@ -255,7 +277,8 @@ function sqlAbfrageDeparture($connect, $DEP)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_ground_dep'>";
         while ($row = $result->fetch_assoc()) {
@@ -279,7 +302,8 @@ function sqlAbfrageDeparture($connect, $DEP)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_atis_dep'>";
         while ($row = $result->fetch_assoc()) {
@@ -303,7 +327,8 @@ function sqlAbfrageDeparture($connect, $DEP)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_tower_dep'>";
         while ($row = $result->fetch_assoc()) {
@@ -329,7 +354,8 @@ function sqlAbfrageDeparture($connect, $DEP)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_delivery_dep'>";
         while ($row = $result->fetch_assoc()) {
@@ -354,7 +380,8 @@ function sqlAbfrageDeparture($connect, $DEP)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_approach_DEP'>";
         while ($row = $result->fetch_assoc()) {
@@ -377,7 +404,8 @@ function sqlAbfrageDeparture($connect, $DEP)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select runway...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_rwy_dep'>";
         while ($row = $result->fetch_assoc()) {
@@ -410,7 +438,8 @@ function sqlAbfrageArrival($connect, $ARR)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_atis_arr'>";
         while ($row = $result->fetch_assoc()) {
@@ -435,7 +464,8 @@ function sqlAbfrageArrival($connect, $ARR)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_approach_arr'>";
         while ($row = $result->fetch_assoc()) {
@@ -459,7 +489,8 @@ function sqlAbfrageArrival($connect, $ARR)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_tower_arr'>";
         while ($row = $result->fetch_assoc()) {
@@ -483,7 +514,8 @@ function sqlAbfrageArrival($connect, $ARR)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select frequency...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 0) {
         echo "<datalist id ='list_ground_arr'>";
         while ($row = $result->fetch_assoc()) {
@@ -506,7 +538,8 @@ function sqlAbfrageArrival($connect, $ARR)
         echo $row['ergebnis'];
         echo "</datalist>";
         array_push($ReturnFrequencies, 'Select runway...');
-        array_push($ReturnFrequencies, $row['ergebnis']);
+        $text = explode(" ", $row['ergebnis']);
+        array_push($ReturnFrequencies,$text[0]);
     } else if (mysqli_num_rows($result) > 1) {
         echo "<datalist id ='list_rwy_arr'>";
         while ($row = $result->fetch_assoc()) {
@@ -535,13 +568,12 @@ function routeLaden($DEP, $ARR, $connect)
     $ergebnis = '';
     $result = $connect->query($sql);
     if (mysqli_num_rows($result) > 0) {
-
         while ($row = $result->fetch_assoc()) {
             $ergebnis = $row['route'];
+
         }
         return $ergebnis;
     } else {
-        echo "0 results";
     }
 }
 
@@ -557,7 +589,6 @@ function treibstoffLaden($DEP, $ARR, $connect)
         }
         return $ergebnis;
     } else {
-        echo "0 results";
     }
 
 
@@ -574,9 +605,74 @@ function alternateLaden($DEP, $ARR, $connect)
         }
         return $ergebnis;
     } else {
-        echo "0 results";
     }
 
+
+}
+
+function sidLaden ($Route, $DEP, $connect){
+    $waypoints = explode(" ", $Route);
+    $firstWp = $waypoints[0];
+    $lastWp = $waypoints[count($waypoints)-1];
+$sql = "SELECT name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
+
+$ReturnSid = array();
+$result = $connect->query($sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_sid'>";
+        echo "<option value=" . $row['name'] . ">";
+        echo "</datalist>";
+        array_push($ReturnSid, 'Select SID...');
+        array_push($ReturnSid, $row['name']);
+    } else if (mysqli_num_rows($result) > 1) {
+        echo "<datalist id ='list_sid'>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row['name'] . ">";
+        }
+        echo "</datalist>";
+        array_push($ReturnSid, 'Select SID...');
+        array_push($ReturnSid, '');
+    } else {
+        array_push($ReturnSid, 'Not available');
+        array_push($ReturnSid, '');
+    }
+return $ReturnSid;
+
+}
+
+function starLaden ($Route, $ARR, $connect){
+    $lastWp = '';
+    $waypoints = explode(" ", $Route);
+//    echo $waypoints[7];
+//    $lastWp = end($waypoints);
+    $lastElement = count($waypoints);
+    $lastElement = $lastElement-2;
+    $lastWp = $waypoints[$lastElement];
+    $sql = "SELECT distinct name from star where star.wegpunkt ='$lastWp' and star.icao = '$ARR'";
+
+    $ReturnStar= array();
+    $result = $connect->query($sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = $result->fetch_assoc();
+        echo "<datalist id ='list_star'>";
+        echo "<option value=" . $row['name'] . ">";
+        echo "</datalist>";
+        array_push($ReturnStar, 'Select STAR...');
+        array_push($ReturnStar, $row['name']);
+    } else if (mysqli_num_rows($result) > 1) {
+        echo "<datalist id ='list_star'>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row['name'] . ">";
+        }
+        echo "</datalist>";
+        array_push($ReturnStar, 'Select STAR...');
+        array_push($ReturnStar, '');
+    } else {
+        array_push($ReturnStar, 'Not available');
+        array_push($ReturnStar, '');
+    }
+    return $ReturnStar;
 
 }
 
