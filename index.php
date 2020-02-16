@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <script src="calculator.php"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300&display=swap" rel="stylesheet">
     <title>Flugplan</title>
 
 </head>
@@ -50,7 +52,15 @@ $NoSid = 'Not available';
 $Sid_value = '';
 $NoStar = 'Not available';
 $Star_value = '';
+$Block_fuel_calc = '0 kg';
+$Zfw = '41000 kg';
+$Tow = '41000kg';
+$Fuelhours = '0 h';
+$block_fuel = '';
+$pax = '';
+$cargo_input = '';
 
+$Ergebnis = array();
 $DepartureReturn = array();
 $ArrivalReturn = array();
 $SidReturn = array();
@@ -154,8 +164,6 @@ if (isset($_POST['name_arrival_input'])) {
         $Rwy_ARR_value = $ArrivalReturn[9];
     }
 }
-
-
 ?>
 
 <header>
@@ -165,17 +173,19 @@ if (isset($_POST['name_arrival_input'])) {
     </div>
 
 </header>
-<div id="div_links">
-    <form id="id_suche" method="post">
-        <input type="text" id="id_route_input_dep" name="name_departure_input" placeholder="Departure ICAO">
-        <input type="text" id="id_route_input_arr" name="name_arrival_input" placeholder="Arrival ICAO">
-        <button type="submit" id="id_create_flightplan">Suchen</button>
-        <br>
-        <iframe id="id_calculator_frame" src="calculator.php"></iframe>
-    </form>
 
-
-</div>
+<form id="id_suche" method="post">
+    <input type="text" id="id_route_input_dep" name="name_departure_input" placeholder="Departure ICAO">
+    <input type="text" id="id_route_input_arr" name="name_arrival_input" placeholder="Arrival ICAO">
+    <button type="submit" id="id_create_flightplan">Suchen</button>
+    <br>
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+    </script>
+    <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php" onload="resizeIframe(this)"></iframe>
+</form>
 
 
 <!--Datalists Departure-Frequenzen-->
@@ -728,7 +738,6 @@ function starLaden($Route, $ARR, $connect)
     return $ReturnStar;
 
 }
-
 
 $connect->close();
 ?>

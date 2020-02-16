@@ -1,22 +1,24 @@
 * {
     box-sizing: border-box;
     background-color: #fff;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     padding: 0;
     margin: 0;
-    font-family: Arial, sans-serif;
 }
-header{
+
+header {
     background-color: #5f5f5f;
 }
-.logo{
+
+.logo {
     background-color: #5f5f5f;
     height: 65px;
     font-size: 30px;
     line-height: 65px;
-    color:#fff;
+    color: #fff;
     text-align: center;
 }
 
@@ -32,7 +34,7 @@ h1 {
     width: 22%;
 }
 
-#id_suche input[type=text]{
+#id_suche input[type=text] {
     padding: 12px 20px 12px 40px;
     width: 197px;
     border: 2px solid #ccc;
@@ -45,11 +47,12 @@ h1 {
     background-position: 10px 11px;
     background-repeat: no-repeat;
 }
-#id_suche input[type=text]:focus{
+
+#id_suche input[type=text]:focus {
     border: 2px solid #0c99ff;
 }
 
-#id_create_flightplan{
+#id_create_flightplan {
     background-color: #007bff;
     color: white;
     border: none;
@@ -65,19 +68,21 @@ h1 {
     cursor: pointer;
     transition: 0.1s;
 }
-#id_create_flightplan:hover{
+
+#id_create_flightplan:hover {
     background-color: #0069d9;
 }
 
-#id_create_flightplan:active{
+#id_create_flightplan:active {
     background-color: #0069d9;
     box-shadow: 0 0 0 2pt #00acff;
 }
-#id_calculator_frame{
-    margin-top:30px;
-    padding:5px;
+
+#id_calculator_iframe {
+    margin-top: 25px;
+    border: none;
     width: 100%;
-    min-height: 410px;
+
 }
 
 #id_flugplan {
@@ -101,6 +106,7 @@ h1 {
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
+
 }
 
 #id_flugplan input[type=text]:focus {
@@ -111,10 +117,14 @@ h1 {
     width: 30%;
     transition: height 0.4s;
     height: 23px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    border: 2px solid #ccc;
 }
 
 #id_flugplan textarea:focus {
     height: 150px;
+    border: 2px solid #0c99ff;
 }
 
 #id_form_plan fieldset {
@@ -137,9 +147,10 @@ h1 {
 }
 
 /*Erste Planzeile:*/
-#id_dep_apt{
-    width:5%;
+#id_dep_apt {
+    width: 5%;
 }
+
 #id_calllsign {
     width: 5%;
 }
@@ -189,16 +200,50 @@ h1 {
 #id_input_date {
 
 }
+#id_atis_freq_dep{
+    width: 11%;
+}
+
+#id_delivery_freq{
+    width: 11%;
+}
+
+#id_gnd_1_freq_dep{
+    width: 11%;
+}
+
+#id_gnd_2_freq_dep{
+    width: 11%;
+}
+
+#id_twr_freq_dep{
+    width: 11%;
+}
+
+
 /*Takeoff section*/
-#id_takeoff_time{
+#id_takeoff_time {
     width: 5%;
 }
-#id_dep_freq{
-    width:14%;
+
+#id_dep_freq {
+    width: 11%;
+}
+#id_rdr_1_freq{
+    width: 11%;
+}
+#id_rdr_2_freq{
+    width: 11%;
+}
+#id_rdr_3_freq{
+    width: 11%;
+}
+#id_rdr_4_freq{
+    width: 11%;
 }
 
 /*Descending section*/
 
-#id_app_freq_arr{
+#id_app_freq_arr {
     width: 14%;
 }
