@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +30,7 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
     $Zfw = $Ergebnis[1];
     $Tow = $Ergebnis[2];
     $Fuelhours = $Ergebnis[3];
+
 } else {
 //    echo 'Bitte alle Felder ausfüllen!';
 }
@@ -37,7 +41,7 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
         <table style="width: 100%">
             <tr>
                 <td>Inital Block Fuel:</td>
-                <td><input type="text" name="block_fuel_input" placeholder="0 kg"></td>
+                <td><input type="text" name="block_fuel_input" placeholder="0 kg" value="<?php echo@$_SESSION['block_fuel'];?>"></td>
             </tr>
             <tr>
                 <td>PAX:</td>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,7 @@ $password = 'GaNJGNU9gBkT';
 $connect = mysqli_connect($host_name, $user_name, $password, $database);
 
 
-session_start();
+
 if (mysqli_connect_errno()) {
     die('<p>Verbindung zum MySQL Server fehlgeschlagen: ' . mysqli_connect_error() . '</p>');
 }
@@ -128,6 +131,7 @@ if (isset($_POST['name_departure_input'])) {
         $ARR = strtoupper($ARR_temp);
         $Route = routeLaden($DEP, $ARR, $connect);
         $Treibstoff = treibstoffLaden($DEP, $ARR, $connect);
+        $_SESSION['block_fuel']=$Treibstoff;
         $Alternate = alternateLaden($DEP, $ARR, $connect);
         $SidReturn = sidLaden($Route, $DEP, $connect);
         $StarReturn = starLaden($Route, $ARR, $connect);
