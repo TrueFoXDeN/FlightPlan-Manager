@@ -12,6 +12,10 @@
 
 <body>
 <?php
+
+require_once 'Metar/Metar.php';
+date_default_timezone_set(date_default_timezone_get());
+
 $host_name = 'mysql01.manitu.net:3306';
 $database = 'db42928';
 $user_name = 'u42928';
@@ -59,7 +63,15 @@ $Fuelhours = '0 h';
 $block_fuel = '';
 $pax = '';
 $cargo_input = '';
+$Dep_Temp = '';
+$Dep_qnh = '';
+$Dep_info = '';
+$Arr_Temp = '';
+$Arr_qnh = '';
+$Arr_notes = '';
 
+
+$Date = date('d/m/Y ');
 $Ergebnis = array();
 $DepartureReturn = array();
 $ArrivalReturn = array();
@@ -69,6 +81,11 @@ if (isset($_POST['name_departure_input'])) {
     $DEP_temp = $_POST['name_departure_input'];
     $DEP = strtoupper($DEP_temp);
     $DepartureReturn = sqlAbfrageDeparture($connect, $DEP);
+    $metar = new Metar(getMetar($DEP), FALSE, TRUE);
+    $parameters = $metar->parse();
+    $Dep_Temp = $parameters['temperature'].' °C';
+    $Dep_qnh = $parameters['barometer'];
+    $Dep_info = getMetar($DEP);
     if (isset($DepartureReturn[0])) {
         $NoGround_DEP = $DepartureReturn[0];
     }
@@ -130,9 +147,16 @@ if (isset($_POST['name_departure_input'])) {
     }
 }
 if (isset($_POST['name_arrival_input'])) {
+    $Route='';
     $ARR_temp = $_POST['name_arrival_input'];
     $ARR = strtoupper($ARR_temp);
     $ArrivalReturn = sqlAbfrageArrival($connect, $ARR);
+    $metar = new Metar(getMetar($ARR), FALSE, TRUE);
+    $parameters = $metar->parse();
+    $Arr_Temp = $parameters['temperature'].' °C';
+    $Arr_qnh = $parameters['barometer'];
+    $Arr_notes = getMetar($ARR);
+    $StarReturn = starLaden($Route, $ARR, $connect);
     if (isset($ArrivalReturn[0])) {
         $NoAtis_ARR = $ArrivalReturn[0];
     }
@@ -164,6 +188,7 @@ if (isset($_POST['name_arrival_input'])) {
         $Rwy_ARR_value = $ArrivalReturn[9];
     }
 }
+
 ?>
 
 <header>
@@ -214,7 +239,7 @@ if (isset($_POST['name_arrival_input'])) {
         <br>
         <fieldset id="id_fieldset_beforeflight">
             <legend id="id_fieldset_beforeflight_legend">Before flight</legend>
-            Date: <input type="text" id="id_date">
+            Date: <input type="text" id="id_date" value="<?php echo@$Date;?>">
             ETD: <input type="text" id="id_etd">
             DEP Apt: <input type="text" id="id_dep_apt" value="<?php echo @$DEP; ?>"/>
             ARR Apt: <input type="text" id="id_arr_apt" value="<?php echo @$ARR; ?>"/>
@@ -225,8 +250,8 @@ if (isset($_POST['name_arrival_input'])) {
             TA: <input type="text" id="id_ta">
             Cruise FL: <input type="text" id="id_cruise_fl">
             ATIS Info: <input type="text" id="id_atis_info_dep">
-            QNH: <input type="text" id="id_qnh_dep">
-            Temp: <input type="text" id="id_temp_dep">
+            QNH: <input type="text" id="id_qnh_dep" value="<?php echo @$Dep_qnh;?>">
+            Temp: <input type="text" id="id_temp_dep" value="<?php echo @$Dep_Temp; ?>">
             Enroute Time: <input type="text" id="id_enroute_time">
             Pax: <input type="text" id="id_pax">
             Cargo: <input type="text" id="id_cargo">
@@ -262,7 +287,7 @@ if (isset($_POST['name_arrival_input'])) {
             Init CLB: <input type="text" id="id_init_clb">
             Squawk: <input type="text" id="id_squawk">
             <br><br>
-            <textarea id="id_further_information" placeholder="Further Information:"></textarea>
+            <textarea id="id_further_information" placeholder="Further Information:"><?php echo htmlspecialchars($Dep_info); ?></textarea>
             <textarea id="id_route" name="name_route"
                       placeholder="Route:"><?php echo htmlspecialchars($Route); ?></textarea>
         </fieldset>
@@ -312,13 +337,13 @@ if (isset($_POST['name_arrival_input'])) {
             Ground 2: <input type="text" id="id_gnd_2_freq_arr" list="list_ground_arr"
                              placeholder="<?php echo @$NoGround_ARR; ?>" value="<?php echo @$Ground_ARR_value; ?>">
             <br><br>
-            QNH: <input type="text" id="id_qnh_arr">
+            QNH: <input type="text" id="id_qnh_arr" value="<?php echo@$Arr_qnh;?>">
             Active Runways: <input type="text" id="id_act_rwys_arr">
-            Temp: <input type="text" id="id_temp_arr">
+            Temp: <input type="text" id="id_temp_arr" value="<?php echo @$Arr_Temp;?>">
             Transition Level: <input type="text" id="id_tl">
             ATIS Info: <input type="text" id="id_atis_info_arr">
             <br><br>
-            <textarea id="id_notes_arr" placeholder="Notizen:"></textarea>
+            <textarea id="id_notes_arr" placeholder="Notizen:"><?php echo htmlspecialchars($Arr_notes); ?></textarea>
 
         </fieldset>
         <br>
@@ -673,8 +698,13 @@ function sidLaden($Route, $DEP, $connect)
 {
     $waypoints = explode(" ", $Route);
     $firstWp = $waypoints[0];
-    $lastWp = $waypoints[count($waypoints) - 1];
-    $sql = "SELECT name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
+//    $lastWp = $waypoints[count($waypoints) - 1];
+    if($firstWp === ''){
+        $sql = "SELECT name from sid where sid.icao = '$DEP'";
+    }else{
+        $sql = "SELECT name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
+    }
+
 
     $ReturnSid = array();
     $result = $connect->query($sql);
@@ -712,8 +742,13 @@ function starLaden($Route, $ARR, $connect)
     $lastElement = count($waypoints);
     $lastElement = $lastElement - 1;
     $lastWp = $waypoints[$lastElement];
-    $sql = "SELECT distinct name from star where star.wegpunkt ='$lastWp' and star.icao = '$ARR'";
-    echo $lastWp;
+    if($lastWp ===''){
+        $sql = "SELECT distinct name from star where star.icao = '$ARR'";
+    }else{
+        $sql = "SELECT distinct name from star where star.wegpunkt ='$lastWp' and star.icao = '$ARR'";
+    }
+
+//    echo $lastWp;
     $ReturnStar = array();
     $result = $connect->query($sql);
     if (mysqli_num_rows($result) == 1) {
@@ -737,6 +772,19 @@ function starLaden($Route, $ARR, $connect)
     }
     return $ReturnStar;
 
+}
+
+function getMetar($ICAO){
+    $Metarpiece = array();
+    $MetarString ='';
+    $Metar = str_replace(array("\r", "\n"), ' ', file_get_contents('https://tgftp.nws.noaa.gov/data/observations/metar/stations/'.$ICAO.'.TXT'));
+    $Metarpiece = explode(" ", $Metar);
+    $Metarpiece[1] = 'METAR';
+    for($i = 1; $i <=count($Metarpiece)-1;$i++){
+        $MetarString = $MetarString.$Metarpiece[$i].' ';
+    }
+//    echo $MetarString;
+    return $MetarString;
 }
 
 $connect->close();

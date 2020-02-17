@@ -9,10 +9,10 @@
 <body>
 <?php
 
-$Block_fuel_calc = '0 kg';
-$Zfw = '41000 kg';
-$Tow = '41000 kg';
-$Fuelhours = '0 h';
+$Block_fuel_calc = '0';
+$Zfw = '41000';
+$Tow = '41000';
+$Fuelhours = '0';
 $block_fuel = '';
 $pax = '';
 $cargo_input = '';
@@ -54,14 +54,14 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
 
     </form>
     <form action="index.php" id="id_calculator_res" method="post">
-        <label>Block Fuel:</label>
-        <label><?php echo htmlspecialchars($Block_fuel_calc); ?></label><br><br>
-        <label>ZFW:</label>
-        <label><?php echo htmlspecialchars($Zfw); ?></label><br><br>
-        <label>TOW:</label>
-        <label><?php echo htmlspecialchars($Tow); ?></label><br><br>
-        <label>Fuelhours:</label>
-        <label><?php echo htmlspecialchars($Fuelhours); ?></label><br><br>
+        <label class="noselect">Block Fuel:</label>
+        <label><?php echo htmlspecialchars($Block_fuel_calc); ?></label><label class="noselect"> kg</label><br><br>
+        <label class="noselect">ZFW:</label>
+        <label><?php echo htmlspecialchars($Zfw); ?></label><label class="noselect"> kg</label><br><br>
+        <label class="noselect">TOW:</label>
+        <label><?php echo htmlspecialchars($Tow); ?></label><label class="noselect"> kg</label><br><br>
+        <label class="noselect">Fuelhours:</label>
+        <label><?php echo htmlspecialchars($Fuelhours); ?></label><label class="noselect"> h</label><br><br>
 
     </form>
 </div>
@@ -77,12 +77,12 @@ function calculation($block_input, $pax, $cargo)
     $Tow = $ZFW + $block_fuel;
     $block_fuel = round($block_fuel, 2);
     $ZFW = round($ZFW, 2);
-    $Tow = round($Tow, 3);
+    $Tow = round($Tow, 0);
     $Fuelhours = round($Fuelhours, 2);
-    array_push($ReturnErgebnis, $block_fuel . ' kg');
-    array_push($ReturnErgebnis, $ZFW . ' kg');
-    array_push($ReturnErgebnis, $Tow . ' kg');
-    array_push($ReturnErgebnis, $Fuelhours . ' h');
+    array_push($ReturnErgebnis, $block_fuel);
+    array_push($ReturnErgebnis, $ZFW);
+    array_push($ReturnErgebnis, $Tow);
+    array_push($ReturnErgebnis, $Fuelhours);
 
     return $ReturnErgebnis;
 }
