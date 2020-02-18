@@ -18,13 +18,13 @@ $Input_wp = '';
 $Input_mode_selector = '';
 $Input_result = '';
 $placeholder_sid = '';
-$placeholder_waypoint ='';
+$placeholder_waypoint = '';
 $placeholder_runway = '';
 $isChecked = 'false';
 connectToDB();
 
-if(isset($_SESSION['ARR'])){
-    $Input_icao=$_SESSION['ARR'];
+if (isset($_SESSION['ARR'])) {
+    $Input_icao = $_SESSION['ARR'];
 }
 
 if (isset($_POST['input_icao'])) {
@@ -44,8 +44,8 @@ if (isset($_POST['input_icao'])) {
 
 
 <form id="id_starfinder_form" method="post" autocomplete="off">
-    <label> STAR Finder</label>
-    <br><br>
+    <label style="display:block; text-align: center;"> STAR Finder</label>
+    <br>
     <table id="id_starfinder_table">
         <tr>
             <td>ICAO:</td>
@@ -63,11 +63,13 @@ if (isset($_POST['input_icao'])) {
         </tr>
     </table>
 
-    <br><br>
+    <br>
+    <div style="width: 100%; text-align: center">
+        <input type="submit" id="id_starfinder_submit" value="Suchen">
+    </div>
 
-    <input type="submit" value="Suchen">
-    <hr>
-    <table>
+    <hr style="color: #ccc; border:none; border-bottom: 2px solid #ccc">
+    <table id="id_starfinderRes_table">
         <tr>
             <td><label id="id_result"><?php echo htmlspecialchars($Result_type); ?></label></td>
             <td><input type="text" list="list_result" placeholder="<?php echo @$placeholder_sid; ?>"></td>
@@ -80,175 +82,171 @@ if (isset($_POST['input_icao'])) {
 <?php
 function getListall($icao, $rwy, $wp)
 {
-        if($rwy!=='' && $wp!==''){
-            $rwy_id = getRwyId($rwy);
-            $sql = "SELECT name from star where icao = '$icao' and runway = '$rwy_id' and wegpunkt = '$wp'";
-            $result = $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_result'>";
+    if ($rwy !== '' && $wp !== '') {
+        $rwy_id = getRwyId($rwy);
+        $sql = "SELECT name from star where icao = '$icao' and runway = '$rwy_id' and wegpunkt = '$wp'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_result'>";
+            echo "<option value=" . $row['name'] . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_result'>";
+            while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['name'] . ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_result'>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value=" . $row['name'] . ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else{
-                $GLOBALS['placeholder_sid']='No STAR available';
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else {
+            $GLOBALS['placeholder_sid'] = 'No STAR available';
         }
-        else if($rwy!==''&&$wp===''){
-            $rwy_id = getRwyId($rwy);
-            $sql = "SELECT distinct name from star where icao='$icao' and runway = '$rwy_id'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_result'>";
+    } else if ($rwy !== '' && $wp === '') {
+        $rwy_id = getRwyId($rwy);
+        $sql = "SELECT distinct name from star where icao='$icao' and runway = '$rwy_id'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_result'>";
+            echo "<option value=" . $row['name'] . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_result'>";
+            while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['name'] . ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_result'>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value=" . $row['name'] . ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else{
-                $GLOBALS['placeholder_sid']='No STAR available';
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else {
+            $GLOBALS['placeholder_sid'] = 'No STAR available';
+        }
 
-            $sql = "SELECT distinct  wegpunkt from star where icao='$icao' and runway = '$rwy_id'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_waypoint'>";
+        $sql = "SELECT distinct  wegpunkt from star where icao='$icao' and runway = '$rwy_id'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_waypoint'>";
+            echo "<option value=" . $row['wegpunkt'] . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_waypoint'>";
+            while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['wegpunkt'] . ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_waypoint']='Select waypoint';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_waypoint'>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value=" . $row['wegpunkt'] . ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_waypoint']='Select waypoint';
-            }else{
-                $GLOBALS['placeholder_waypoint']='No waypoint available';
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+        } else {
+            $GLOBALS['placeholder_waypoint'] = 'No waypoint available';
         }
-        else if($rwy===''&$wp!==''){
-            $sql = "SELECT distinct name from star where icao='$icao' and wegpunkt = '$wp'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_result'>";
+    } else if ($rwy === '' & $wp !== '') {
+        $sql = "SELECT distinct name from star where icao='$icao' and wegpunkt = '$wp'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_result'>";
+            echo "<option value=" . $row['name'] . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_result'>";
+            while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['name'] . ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_result'>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value=" . $row['name'] . ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else{
-                $GLOBALS['placeholder_sid']='No STAR available';
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else {
+            $GLOBALS['placeholder_sid'] = 'No STAR available';
+        }
 
-            $sql = "SELECT distinct  runway from star where icao='$icao' and wegpunkt='$wp'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_runway'>";
+        $sql = "SELECT distinct  runway from star where icao='$icao' and wegpunkt='$wp'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_runway'>";
+            $rwy_richtung = getRwyDir($row['runway']);
+            echo "<option value=" . $rwy_richtung . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_runway'] = 'Select runway';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_runway'>";
+            while ($row = $result->fetch_assoc()) {
                 $rwy_richtung = getRwyDir($row['runway']);
-                echo "<option value=" . $rwy_richtung. ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_runway']='Select runway';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_runway'>";
-                while ($row = $result->fetch_assoc()) {
-                    $rwy_richtung = getRwyDir($row['runway']);
-                    echo "<option value=" . $rwy_richtung. ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_runway']='Select runway';
-            }else{
-                $GLOBALS['placeholder_runway']='No runway available';
+                echo "<option value=" . $rwy_richtung . ">";
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_runway'] = 'Select runway';
+        } else {
+            $GLOBALS['placeholder_runway'] = 'No runway available';
+        }
 
-        }else if($rwy===''&&$wp===''){
-            $sql = "SELECT distinct name from star where icao='$icao'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_result'>";
+    } else if ($rwy === '' && $wp === '') {
+        $sql = "SELECT distinct name from star where icao='$icao'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_result'>";
+            echo "<option value=" . $row['name'] . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_result'>";
+            while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['name'] . ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_result'>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value=" . $row['name'] . ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_sid']='Select STAR';
-            }else{
-                $GLOBALS['placeholder_sid']='No STAR available';
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_sid'] = 'Select STAR';
+        } else {
+            $GLOBALS['placeholder_sid'] = 'No STAR available';
+        }
 
-            $sql = "SELECT distinct  runway from star where icao='$icao'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_runway'>";
+        $sql = "SELECT distinct  runway from star where icao='$icao'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_runway'>";
+            $rwy_richtung = getRwyDir($row['runway']);
+            echo "<option value=" . $rwy_richtung . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_runway'] = 'Select runway';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_runway'>";
+            while ($row = $result->fetch_assoc()) {
                 $rwy_richtung = getRwyDir($row['runway']);
-                echo "<option value=" . $rwy_richtung. ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_runway']='Select runway';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_runway'>";
-                while ($row = $result->fetch_assoc()) {
-                    $rwy_richtung = getRwyDir($row['runway']);
-                    echo "<option value=" . $rwy_richtung. ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_runway']='Select runway';
-            }else{
-                $GLOBALS['placeholder_runway']='No runway available';
+                echo "<option value=" . $rwy_richtung . ">";
             }
+            echo "</datalist>";
+            $GLOBALS['placeholder_runway'] = 'Select runway';
+        } else {
+            $GLOBALS['placeholder_runway'] = 'No runway available';
+        }
 
-            $sql = "SELECT distinct  wegpunkt from star where icao='$icao'";
-            $result= $GLOBALS['connect']->query($sql);
-            if(mysqli_num_rows($result)==1){
-                $row = $result->fetch_assoc();
-                echo "<datalist id ='list_waypoint'>";
+        $sql = "SELECT distinct  wegpunkt from star where icao='$icao'";
+        $result = $GLOBALS['connect']->query($sql);
+        if (mysqli_num_rows($result) == 1) {
+            $row = $result->fetch_assoc();
+            echo "<datalist id ='list_waypoint'>";
+            echo "<option value=" . $row['wegpunkt'] . ">";
+            echo "</datalist>";
+            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+        } else if (mysqli_num_rows($result) > 1) {
+            echo "<datalist id ='list_waypoint'>";
+            while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['wegpunkt'] . ">";
-                echo "</datalist>";
-                $GLOBALS['placeholder_waypoint']='Select waypoint';
-            }else if(mysqli_num_rows($result)>1){
-                echo "<datalist id ='list_waypoint'>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value=" . $row['wegpunkt'] . ">";
-                }
-                echo "</datalist>";
-                $GLOBALS['placeholder_waypoint']='Select waypoint';
-            }else{
-                $GLOBALS['placeholder_waypoint']='No waypoint available';
             }
-
-
+            echo "</datalist>";
+            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+        } else {
+            $GLOBALS['placeholder_waypoint'] = 'No waypoint available';
         }
 
+
+    }
 
 
 }
-
 
 
 function connectToDB()
@@ -271,7 +269,8 @@ function getRwyId($richtung)
     return $row['id'];
 }
 
-function getRwyDir($id){
+function getRwyDir($id)
+{
     $sql = "SELECT richtung from runways where id ='$id'";
     $result = $GLOBALS['connect']->query($sql);
     $row = $result->fetch_assoc();

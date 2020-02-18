@@ -216,6 +216,7 @@ if (isset($_POST['name_arrival_input'])) {
     </script>
     <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php"
                      onload="resizeIframe(this)"></iframe>
+    <br><br>
     <div style="display: inline">
         <iframe width="49%" id="id_sidfinder_iframe" frameborder="0" scrolling="no" src="sid_finder.php"
                 onload="resizeIframe(this)"></iframe>

@@ -43,8 +43,8 @@ if (isset($_POST['input_icao'])) {
 
 
 <form id="id_sidfinder_form" method="post" autocomplete="off">
-    <label> SID Finder</label>
-    <br><br>
+    <label style="display:block; text-align: center;"> SID Finder</label>
+    <br>
     <table id="id_sidfinder_table">
         <tr>
             <td>ICAO:</td>
@@ -62,10 +62,12 @@ if (isset($_POST['input_icao'])) {
         </tr>
     </table>
 
-    <br><br>
+    <br>
+    <div style="width: 100%; text-align: center">
+        <input type="submit" id="id_sidfinder_submit" value="Suchen">
+    </div>
 
-    <input type="submit" value="Suchen">
-    <hr>
+    <hr style="color: #ccc;border:none; border-bottom: 2px solid #ccc">
     <table id ="id_sidfinderRes_table">
         <tr>
             <td><label id="id_result"><?php echo htmlspecialchars($Result_type); ?></label></td>
@@ -134,9 +136,9 @@ function getListall($icao, $rwy, $wp)
                 echo "<option value=" . $row['wegpunkt'] . ">";
             }
             echo "</datalist>";
-            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+            $GLOBALS['placeholder_waypoint'] = 'Sel. waypoint';
         } else {
-            $GLOBALS['placeholder_waypoint'] = 'No waypoint available';
+            $GLOBALS['placeholder_waypoint'] = 'No wayp. av.';
         }
     } else if ($rwy === '' & $wp !== '') {
         $sql = "SELECT distinct name from sid where icao='$icao' and wegpunkt = '$wp'";
@@ -166,7 +168,7 @@ function getListall($icao, $rwy, $wp)
             $rwy_richtung = getRwyDir($row['runway']);
             echo "<option value=" . $rwy_richtung . ">";
             echo "</datalist>";
-            $GLOBALS['placeholder_runway'] = 'Select runway';
+            $GLOBALS['placeholder_runway'] = 'Sel. runway';
         } else if (mysqli_num_rows($result) > 1) {
             echo "<datalist id ='list_runway'>";
             while ($row = $result->fetch_assoc()) {
@@ -174,9 +176,9 @@ function getListall($icao, $rwy, $wp)
                 echo "<option value=" . $rwy_richtung . ">";
             }
             echo "</datalist>";
-            $GLOBALS['placeholder_runway'] = 'Select runway';
+            $GLOBALS['placeholder_runway'] = 'Sel. runway';
         } else {
-            $GLOBALS['placeholder_runway'] = 'No runway available';
+            $GLOBALS['placeholder_runway'] = 'No runway av.';
         }
 
     } else if ($rwy === '' && $wp === '') {
@@ -207,7 +209,7 @@ function getListall($icao, $rwy, $wp)
             $rwy_richtung = getRwyDir($row['runway']);
             echo "<option value=" . $rwy_richtung . ">";
             echo "</datalist>";
-            $GLOBALS['placeholder_runway'] = 'Select runway';
+            $GLOBALS['placeholder_runway'] = 'Sel. runway';
         } else if (mysqli_num_rows($result) > 1) {
             echo "<datalist id ='list_runway'>";
             while ($row = $result->fetch_assoc()) {
@@ -215,9 +217,9 @@ function getListall($icao, $rwy, $wp)
                 echo "<option value=" . $rwy_richtung . ">";
             }
             echo "</datalist>";
-            $GLOBALS['placeholder_runway'] = 'Select runway';
+            $GLOBALS['placeholder_runway'] = 'Sel. runway';
         } else {
-            $GLOBALS['placeholder_runway'] = 'No runway available';
+            $GLOBALS['placeholder_runway'] = 'No runway av.';
         }
 
         $sql = "SELECT distinct  wegpunkt from sid where icao='$icao'";
@@ -227,16 +229,16 @@ function getListall($icao, $rwy, $wp)
             echo "<datalist id ='list_waypoint'>";
             echo "<option value=" . $row['wegpunkt'] . ">";
             echo "</datalist>";
-            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+            $GLOBALS['placeholder_waypoint'] = 'Sel. waypoint';
         } else if (mysqli_num_rows($result) > 1) {
             echo "<datalist id ='list_waypoint'>";
             while ($row = $result->fetch_assoc()) {
                 echo "<option value=" . $row['wegpunkt'] . ">";
             }
             echo "</datalist>";
-            $GLOBALS['placeholder_waypoint'] = 'Select waypoint';
+            $GLOBALS['placeholder_waypoint'] = 'Sel. waypoint';
         } else {
-            $GLOBALS['placeholder_waypoint'] = 'No waypoint available';
+            $GLOBALS['placeholder_waypoint'] = 'No wayp. av.';
         }
     }
 }
