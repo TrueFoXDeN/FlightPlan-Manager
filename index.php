@@ -151,7 +151,6 @@ if (isset($_POST['name_departure_input'])) {
     }
 }
 if (isset($_POST['name_arrival_input'])) {
-    $Route='';
     $ARR_temp = $_POST['name_arrival_input'];
     $ARR = strtoupper($ARR_temp);
     $ArrivalReturn = sqlAbfrageArrival($connect, $ARR);
@@ -214,6 +213,7 @@ if (isset($_POST['name_arrival_input'])) {
         }
     </script>
     <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php" onload="resizeIframe(this)"></iframe>
+    <iframe id="id_sidstarfinder_iframe" frameborder="0" scrolling="no" src="sidstarFinder.php" onload="resizeIframe(this)"></iframe>
 </form>
 
 
