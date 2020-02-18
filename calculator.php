@@ -92,8 +92,8 @@ function calculation($block_input, $pax, $cargo)
     $block_fuel = $block_input + ($block_input * ($TotalPayload * 0.00001230769));
     $Fuelhours = $block_fuel / 2000;
     $Tow = $ZFW + $block_fuel;
-    $block_fuel = round($block_fuel, 2);
-    $ZFW = round($ZFW, 2);
+    $block_fuel = round($block_fuel, 0);
+    $ZFW = round($ZFW, 0);
     $Tow = round($Tow, 0);
     $Fuelhours = round($Fuelhours, 2);
     array_push($ReturnErgebnis, $block_fuel);

@@ -264,7 +264,7 @@ if (isset($_POST['name_arrival_input'])) {
             ZFW: <input type="text" id="id_zfw">
             TOW: <input type="text" id="id_tow">
             Trip Fuel: <input type="text" id="id_tripfuel" value="<?php echo @$Treibstoff; ?>">
-            Fuel hours: <input type="text" id="id_fuel_hours">
+            Fuel Hours: <input type="text" id="id_fuel_hours">
             <br><br>
             ATIS Freq: <input type="text" list="list_atis_dep" id="id_atis_freq_dep"
                               PLACEHOLDER="<?php echo @$NoAtis_DEP; ?>"
@@ -708,7 +708,6 @@ function sidLaden($Route, $DEP, $connect)
     }else{
         $sql = "SELECT name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
     }
-
 
     $ReturnSid = array();
     $result = $connect->query($sql);
