@@ -213,8 +213,10 @@ if (isset($_POST['name_arrival_input'])) {
         }
     </script>
     <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php" onload="resizeIframe(this)"></iframe>
-    <iframe id="id_sidstarfinder_iframe" frameborder="0" scrolling="no" src="sidstarFinder.php" onload="resizeIframe(this)"></iframe>
+    <iframe id="id_sidfinder_iframe" frameborder="0" scrolling="no" src="sid_finder.php" onload="resizeIframe(this)"></iframe>
+    <iframe id="id_starfinder_iframe" frameborder="0" scrolling="no" src="star_finder.php" onload="resizeIframe(this)"></iframe>
 </form>
+
 
 
 <!--Datalists Departure-Frequenzen-->
@@ -658,7 +660,6 @@ function routeLaden($DEP, $ARR, $connect)
     if (mysqli_num_rows($result) > 0) {
         while ($row = $result->fetch_assoc()) {
             $ergebnis = $row['route'];
-
         }
         return $ergebnis;
     } else {
