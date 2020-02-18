@@ -55,7 +55,7 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
             </tr>
         </table>
 
-        <input type="submit" id="id_calculator_submit" value="Submit">
+        <input type="submit" id="id_calculator_submit" value="Berechnen">
         <hr style="color: #ccc;border:none; border-bottom: 2px solid #ccc">
 
     </form>
