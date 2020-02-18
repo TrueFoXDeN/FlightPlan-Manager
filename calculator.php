@@ -38,10 +38,11 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
 ?>
 <div id="id_calculator_frame">
     <form id="id_calculator" method="post">
-        <table style="width: 100%">
+        <table style="width: 100%" id="id_calculator_table">
             <tr>
-                <td>Inital Block Fuel:</td>
-                <td><input type="text" name="block_fuel_input" placeholder="0 kg" value="<?php echo@$_SESSION['block_fuel'];?>"></td>
+                <td style="width: 50%">Inital Block Fuel:</td>
+                <td style="width: 50%"><input type="text" style="width: 188px" name="block_fuel_input" placeholder="0 kg"
+                           value="<?php echo @$_SESSION['block_fuel']; ?>"></td>
             </tr>
             <tr>
                 <td>PAX:</td>
@@ -58,14 +59,24 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
 
     </form>
     <form action="index.php" id="id_calculator_res" method="post">
-        <label class="noselect">Block Fuel:</label>
-        <label><?php echo htmlspecialchars($Block_fuel_calc); ?></label><label class="noselect"> kg</label><br><br>
-        <label class="noselect">ZFW:</label>
-        <label><?php echo htmlspecialchars($Zfw); ?></label><label class="noselect"> kg</label><br><br>
-        <label class="noselect">TOW:</label>
-        <label><?php echo htmlspecialchars($Tow); ?></label><label class="noselect"> kg</label><br><br>
-        <label class="noselect">Fuelhours:</label>
-        <label><?php echo htmlspecialchars($Fuelhours); ?></label><label class="noselect"> h</label><br><br>
+        <table style="width: 100%">
+            <tr>
+                <td width="50%"><label class="noselect">Block Fuel:</label></td>
+                <td width="50%"><?php echo htmlspecialchars($Block_fuel_calc);?><label class="noselect"> kg</label></td>
+            </tr>
+            <tr>
+                <td><label class="noselect">FW:</label></td>
+                <td><?php echo htmlspecialchars($Zfw);?><label class="noselect"> kg</label></td>
+            </tr>
+            <tr>
+                <td><label class="noselect">TOW:</label></td>
+                <td><?php echo htmlspecialchars($Tow);?><label class="noselect"> kg</label></td>
+            </tr>
+            <tr>
+                <td><label class="noselect">Fuel Hours:</label></td>
+                <td><?php echo htmlspecialchars($Fuelhours);?><label class="noselect"> h</label></td>
+            </tr>
+        </table>
 
     </form>
 </div>
