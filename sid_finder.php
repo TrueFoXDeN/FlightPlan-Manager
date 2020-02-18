@@ -34,21 +34,37 @@ if (isset($_POST['input_icao'])) {
 <datalist id="list_waypoint" name="list_waypoint"></datalist>
 
 
-<form id="id_form" method="post" autocomplete="off">
-    <label> SID</label>
+<form id="id_sidfinder_form" method="post" autocomplete="off">
+    <label> SID Finder</label>
     <br><br>
-    ICAO: <input type="text" name="input_icao" value="<?php echo @$Input_icao; ?>">
+    <table id="id_sidfinder_table">
+        <tr>
+            <td>ICAO:</td>
+            <td><input type="text" name="input_icao" value="<?php echo @$Input_icao; ?>"></td>
+        </tr>
+        <tr>
+            <td>Runway:</td>
+            <td><input type="text" list="list_runway" value="<?php echo @$Input_rwy; ?>" name="input_rwy"
+                       placeholder="<?php echo @$placeholder_runway; ?>"></td>
+        </tr>
+        <tr>
+            <td>Waypoint:</td>
+            <td><input type="text" name="input_waypoint" value="<?php echo @$Input_wp; ?>" list="list_waypoint"
+                       placeholder="<?php echo @$placeholder_waypoint; ?>"></td>
+        </tr>
+    </table>
+
     <br><br>
-    Runway: <input type="text" list="list_runway" value="<?php echo @$Input_rwy; ?>" name="input_rwy"
-                   placeholder="<?php echo @$placeholder_runway; ?>">
-    <br><br>
-    Waypoint: <input type="text" name="input_waypoint" value="<?php echo @$Input_wp; ?>" list="list_waypoint"
-                     placeholder="<?php echo @$placeholder_waypoint; ?>">
-    <br><br>
+
     <input type="submit" value="Suchen">
     <hr>
-    <label id="id_result"><?php echo htmlspecialchars($Result_type); ?></label><input type="text" list="list_result"
-                                                                                      placeholder="<?php echo @$placeholder_sid; ?>">
+    <table id ="id_sidfinderRes_table">
+        <tr>
+            <td><label id="id_result"><?php echo htmlspecialchars($Result_type); ?></label></td>
+            <td><input type="text" list="list_result" placeholder="<?php echo @$placeholder_sid; ?>"></td>
+        </tr>
+    </table>
+
 </form>
 </body>
 

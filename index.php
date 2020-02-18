@@ -26,7 +26,6 @@ $password = 'GaNJGNU9gBkT';
 $connect = mysqli_connect($host_name, $user_name, $password, $database);
 
 
-
 if (mysqli_connect_errno()) {
     die('<p>Verbindung zum MySQL Server fehlgeschlagen: ' . mysqli_connect_error() . '</p>');
 }
@@ -86,7 +85,7 @@ if (isset($_POST['name_departure_input'])) {
     $DepartureReturn = sqlAbfrageDeparture($connect, $DEP);
     $metar = new Metar(getMetar($DEP), FALSE, TRUE);
     $parameters = $metar->parse();
-    $Dep_Temp = $parameters['temperature'].' °C';
+    $Dep_Temp = $parameters['temperature'] . ' °C';
     $Dep_qnh = $parameters['barometer'];
     $Dep_info = getMetar($DEP);
     if (isset($DepartureReturn[0])) {
@@ -131,7 +130,7 @@ if (isset($_POST['name_departure_input'])) {
         $ARR = strtoupper($ARR_temp);
         $Route = routeLaden($DEP, $ARR, $connect);
         $Treibstoff = treibstoffLaden($DEP, $ARR, $connect);
-        $_SESSION['block_fuel']=$Treibstoff;
+        $_SESSION['block_fuel'] = $Treibstoff;
         $Alternate = alternateLaden($DEP, $ARR, $connect);
         $SidReturn = sidLaden($Route, $DEP, $connect);
         $StarReturn = starLaden($Route, $ARR, $connect);
@@ -156,7 +155,7 @@ if (isset($_POST['name_arrival_input'])) {
     $ArrivalReturn = sqlAbfrageArrival($connect, $ARR);
     $metar = new Metar(getMetar($ARR), FALSE, TRUE);
     $parameters = $metar->parse();
-    $Arr_Temp = $parameters['temperature'].' °C';
+    $Arr_Temp = $parameters['temperature'] . ' °C';
     $Arr_qnh = $parameters['barometer'];
     $Arr_notes = getMetar($ARR);
     $StarReturn = starLaden($Route, $ARR, $connect);
@@ -212,11 +211,17 @@ if (isset($_POST['name_arrival_input'])) {
             obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
         }
     </script>
-    <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php" onload="resizeIframe(this)"></iframe>
-    <iframe id="id_sidfinder_iframe" frameborder="0" scrolling="no" src="sid_finder.php" onload="resizeIframe(this)"></iframe>
-    <iframe id="id_starfinder_iframe" frameborder="0" scrolling="no" src="star_finder.php" onload="resizeIframe(this)"></iframe>
-</form>
+    <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php"
+                     onload="resizeIframe(this)"></iframe>
+    <div style="display: inline">
+        <iframe width="49%" id="id_sidfinder_iframe" frameborder="0" scrolling="no" src="sid_finder.php"
+                onload="resizeIframe(this)"></iframe>
+        <iframe width="49%" id="id_starfinder_iframe" frameborder="0" scrolling="no" src="star_finder.php"
+                onload="resizeIframe(this)"></iframe>
+    </div>
 
+
+</form>
 
 
 <!--Datalists Departure-Frequenzen-->
@@ -245,7 +250,7 @@ if (isset($_POST['name_arrival_input'])) {
         <br>
         <fieldset id="id_fieldset_beforeflight">
             <legend id="id_fieldset_beforeflight_legend">Before flight</legend>
-            Date: <input type="text" id="id_date" value="<?php echo@$Date;?>">
+            Date: <input type="text" id="id_date" value="<?php echo @$Date; ?>">
             ETD: <input type="text" id="id_etd">
             DEP Apt: <input type="text" id="id_dep_apt" value="<?php echo @$DEP; ?>"/>
             ARR Apt: <input type="text" id="id_arr_apt" value="<?php echo @$ARR; ?>"/>
@@ -256,7 +261,7 @@ if (isset($_POST['name_arrival_input'])) {
             TA: <input type="text" id="id_ta">
             Cruise FL: <input type="text" id="id_cruise_fl">
             ATIS Info: <input type="text" id="id_atis_info_dep">
-            QNH: <input type="text" id="id_qnh_dep" value="<?php echo @$Dep_qnh;?>">
+            QNH: <input type="text" id="id_qnh_dep" value="<?php echo @$Dep_qnh; ?>">
             Temp: <input type="text" id="id_temp_dep" value="<?php echo @$Dep_Temp; ?>">
             Enroute Time: <input type="text" id="id_enroute_time">
             Pax: <input type="text" id="id_pax">
@@ -293,7 +298,8 @@ if (isset($_POST['name_arrival_input'])) {
             Init CLB: <input type="text" id="id_init_clb">
             Squawk: <input type="text" id="id_squawk">
             <br><br>
-            <textarea id="id_further_information" placeholder="Further Information:"><?php echo htmlspecialchars($Dep_info); ?></textarea>
+            <textarea id="id_further_information"
+                      placeholder="Further Information:"><?php echo htmlspecialchars($Dep_info); ?></textarea>
             <textarea id="id_route" name="name_route"
                       placeholder="Route:"><?php echo htmlspecialchars($Route); ?></textarea>
         </fieldset>
@@ -343,9 +349,9 @@ if (isset($_POST['name_arrival_input'])) {
             Ground 2: <input type="text" id="id_gnd_2_freq_arr" list="list_ground_arr"
                              placeholder="<?php echo @$NoGround_ARR; ?>" value="<?php echo @$Ground_ARR_value; ?>">
             <br><br>
-            QNH: <input type="text" id="id_qnh_arr" value="<?php echo@$Arr_qnh;?>">
+            QNH: <input type="text" id="id_qnh_arr" value="<?php echo @$Arr_qnh; ?>">
             Active Runways: <input type="text" id="id_act_rwys_arr">
-            Temp: <input type="text" id="id_temp_arr" value="<?php echo @$Arr_Temp;?>">
+            Temp: <input type="text" id="id_temp_arr" value="<?php echo @$Arr_Temp; ?>">
             Transition Level: <input type="text" id="id_tl">
             ATIS Info: <input type="text" id="id_atis_info_arr">
             <br><br>
@@ -704,9 +710,9 @@ function sidLaden($Route, $DEP, $connect)
     $waypoints = explode(" ", $Route);
     $firstWp = $waypoints[0];
 //    $lastWp = $waypoints[count($waypoints) - 1];
-    if($firstWp === ''){
+    if ($firstWp === '') {
         $sql = "SELECT name from sid where sid.icao = '$DEP'";
-    }else{
+    } else {
         $sql = "SELECT name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
     }
 
@@ -746,9 +752,9 @@ function starLaden($Route, $ARR, $connect)
     $lastElement = count($waypoints);
     $lastElement = $lastElement - 1;
     $lastWp = $waypoints[$lastElement];
-    if($lastWp ===''){
+    if ($lastWp === '') {
         $sql = "SELECT distinct name from star where star.icao = '$ARR'";
-    }else{
+    } else {
         $sql = "SELECT distinct name from star where star.wegpunkt ='$lastWp' and star.icao = '$ARR'";
     }
 
@@ -778,14 +784,15 @@ function starLaden($Route, $ARR, $connect)
 
 }
 
-function getMetar($ICAO){
+function getMetar($ICAO)
+{
     $Metarpiece = array();
-    $MetarString ='';
-    $Metar = str_replace(array("\r", "\n"), ' ', file_get_contents('https://tgftp.nws.noaa.gov/data/observations/metar/stations/'.$ICAO.'.TXT'));
+    $MetarString = '';
+    $Metar = str_replace(array("\r", "\n"), ' ', file_get_contents('https://tgftp.nws.noaa.gov/data/observations/metar/stations/' . $ICAO . '.TXT'));
     $Metarpiece = explode(" ", $Metar);
     $Metarpiece[1] = 'METAR';
-    for($i = 1; $i <=count($Metarpiece)-1;$i++){
-        $MetarString = $MetarString.$Metarpiece[$i].' ';
+    for ($i = 1; $i <= count($Metarpiece) - 1; $i++) {
+        $MetarString = $MetarString . $Metarpiece[$i] . ' ';
     }
 //    echo $MetarString;
     return $MetarString;
