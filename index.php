@@ -82,6 +82,7 @@ $StarReturn = array();
 if (isset($_POST['name_departure_input'])) {
     $DEP_temp = $_POST['name_departure_input'];
     $DEP = strtoupper($DEP_temp);
+    $_SESSION['DEP'] = $DEP;
     $DepartureReturn = sqlAbfrageDeparture($connect, $DEP);
     $metar = new Metar(getMetar($DEP), FALSE, TRUE);
     $parameters = $metar->parse();
@@ -131,6 +132,7 @@ if (isset($_POST['name_departure_input'])) {
         $Route = routeLaden($DEP, $ARR, $connect);
         $Treibstoff = treibstoffLaden($DEP, $ARR, $connect);
         $_SESSION['block_fuel'] = $Treibstoff;
+        $_SESSION['ARR']= $ARR;
         $Alternate = alternateLaden($DEP, $ARR, $connect);
         $SidReturn = sidLaden($Route, $DEP, $connect);
         $StarReturn = starLaden($Route, $ARR, $connect);
@@ -152,6 +154,7 @@ if (isset($_POST['name_departure_input'])) {
 if (isset($_POST['name_arrival_input'])) {
     $ARR_temp = $_POST['name_arrival_input'];
     $ARR = strtoupper($ARR_temp);
+    $_SESSION['ARR']= $ARR;
     $ArrivalReturn = sqlAbfrageArrival($connect, $ARR);
     $metar = new Metar(getMetar($ARR), FALSE, TRUE);
     $parameters = $metar->parse();

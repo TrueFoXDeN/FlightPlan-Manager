@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +20,11 @@ $placeholder_sid = '';
 $placeholder_waypoint = '';
 $placeholder_runway = '';
 connectToDB();
+
+if(isset($_SESSION['DEP'])){
+    $Input_icao=$_SESSION['DEP'];
+}
+
 
 if (isset($_POST['input_icao'])) {
     $Input_icao = $_POST['input_icao'];

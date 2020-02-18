@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +22,10 @@ $placeholder_waypoint ='';
 $placeholder_runway = '';
 $isChecked = 'false';
 connectToDB();
+
+if(isset($_SESSION['ARR'])){
+    $Input_icao=$_SESSION['ARR'];
+}
 
 if (isset($_POST['input_icao'])) {
     $Input_icao = $_POST['input_icao'];
