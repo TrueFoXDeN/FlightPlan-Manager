@@ -77,19 +77,19 @@ if(isset($_POST['name_alt_apt'])){$alt_apt=$_POST['name_alt_apt'];}
 if(isset($_POST['name_callsign'])){$callsign=$_POST['name_callsign'];}
 if(isset($_POST['name_stand_dep'])){$stand_dep=$_POST['name_stand_dep'];}
 if(isset($_POST['name_act_runways'])){$act_rwys_dep=$_POST['name_act_runways'];}
-if(isset($_POST['name_ta'])){$ta=$_POST['name_ta'].' ft';}
+if(isset($_POST['name_ta'])&&$_POST['name_ta']!==''){$ta=$_POST['name_ta'].' ft';}
 if(isset($_POST['name_cruise_fl'])){$cruise_fl=$_POST['name_cruise_fl'];}
 if(isset($_POST['name_atis_info_dep'])){$atis_info_dep=$_POST['name_atis_info_dep'];}
 if(isset($_POST['name_qnh_dep'])){$qnh_dep=$_POST['name_qnh_dep'].' hPa';}
 if(isset($_POST['name_temp_dep'])){$temp_dep=$_POST['name_temp_dep'];}
-if(isset($_POST['name_enroute_time'])){$enroute_time=$_POST['name_enroute_time']. ' h';}
+if(isset($_POST['name_enroute_time'])&&$_POST['name_enroute_time']!==''){$enroute_time=$_POST['name_enroute_time']. ' h';}
 if(isset($_POST['name_pax'])){$pax=$_POST['name_pax'];}
-if(isset($_POST['name_cargo'])){$cargo=$_POST['name_cargo']. ' kg';}
-if(isset($_POST['name_blockfuel'])){$block_fuel=$_POST['name_blockfuel']. ' kg';}
-if(isset($_POST['name_zfw'])){$zfw=$_POST['name_zfw']. ' kg';}
-if(isset($_POST['name_tow'])){$tow=$_POST['name_tow'].' kg';}
-if(isset($_POST['name_tripfuel'])){$tripfuel=$_POST['name_tripfuel']. ' kg';}
-if(isset($_POST['name_fuelhours'])){$fuel_hours=$_POST['name_fuelhours']. ' h';}
+if(isset($_POST['name_cargo'])&&$_POST['name_cargo']!==''){$cargo=$_POST['name_cargo']. ' kg';}
+if(isset($_POST['name_blockfuel'])&&$_POST['name_blockfuel']!==''){$block_fuel=$_POST['name_blockfuel']. ' kg';}
+if(isset($_POST['name_zfw'])&&$_POST['name_zfw']!==''){$zfw=$_POST['name_zfw']. ' kg';}
+if(isset($_POST['name_tow'])&&$_POST['name_tow']!==''){$tow=$_POST['name_tow'].' kg';}
+if(isset($_POST['name_tripfuel'])&&$_POST['name_tripfuel']!==''){$tripfuel=$_POST['name_tripfuel']. ' kg';}
+if(isset($_POST['name_fuelhours'])&&$_POST['name_fuelhours']!==''){$fuel_hours=$_POST['name_fuelhours']. ' h';}
 if(isset($_POST['name_atis_freq_dep'])){$atis_freq_dep=$_POST['name_atis_freq_dep'];}
 if(isset($_POST['name_delivery_freq'])){$delivery_freq=$_POST['name_delivery_freq'];}
 if(isset($_POST['name_gnd_1_freq_dep'])){$gnd_1_freq_dep=$_POST['name_gnd_1_freq_dep'];}
