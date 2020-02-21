@@ -84,7 +84,7 @@ function getListall($icao, $rwy, $wp)
 {
     if ($rwy !== '' && $wp !== '') {
         $rwy_id = getRwyId($rwy);
-        $sql = "SELECT name from star where icao = '$icao' and runway = '$rwy_id' and wegpunkt = '$wp'";
+        $sql = "SELECT distinct name from star where icao = '$icao' and runway = '$rwy_id' and wegpunkt = '$wp'";
         $result = $GLOBALS['connect']->query($sql);
         if (mysqli_num_rows($result) == 1) {
             $row = $result->fetch_assoc();

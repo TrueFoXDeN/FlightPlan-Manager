@@ -310,8 +310,6 @@ if (isset($_POST['name_arrival_input'])) {
         <br>
         <fieldset>
             <legend>Taxi</legend>
-            Time: <input type="text" id="id_taxi_time">
-            <br><br>
             <textarea id="id_taxi_route" name="name_taxi_route" placeholder="Taxiroute:"></textarea>
         </fieldset>
         <br>
@@ -715,9 +713,9 @@ function sidLaden($Route, $DEP, $connect)
     $firstWp = $waypoints[0];
 //    $lastWp = $waypoints[count($waypoints) - 1];
     if ($firstWp === '') {
-        $sql = "SELECT name from sid where sid.icao = '$DEP'";
+        $sql = "SELECT distinct name from sid where sid.icao = '$DEP'";
     } else {
-        $sql = "SELECT name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
+        $sql = "SELECT distinct name from sid where sid.wegpunkt ='$firstWp' and sid.icao = '$DEP'";
     }
 
     $ReturnSid = array();
