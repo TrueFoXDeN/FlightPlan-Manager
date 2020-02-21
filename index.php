@@ -367,7 +367,7 @@ if (isset($_POST['name_arrival_input'])) {
 
         </fieldset>
         <br>
-        <input type="submit" value="Drucken">
+        <input type="submit" id="id_flugplan_drucken" value="Drucken">
     </form>
 </div>
 

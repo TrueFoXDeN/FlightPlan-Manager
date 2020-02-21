@@ -129,7 +129,7 @@ if(isset($_POST['name_notes_arr'])){$notes_arr=$_POST['name_notes_arr'];}
 ?>
 
 <div id="id_print_head">
-    ATC - Plan
+    Flight Plan
 </div>
 <div id="id_print_border">
     <table id="id_print_title1">

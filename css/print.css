@@ -44,18 +44,50 @@ html, body {
 #id_print_col7, #id_print_col8, #id_print_col10, #id_print_col14{
     height: 10%;
 }
+#id_print_col2{
+    min-width: 10%;
+}
+#id_print_col5{
+    height: 6%;
+}
+#id_print_col6 td{
+    width: 25%;
+}
+#id_print_col9{
+    height: 6%;
+}
+#id_print_col9 td{
+    width: 16.6%;
+}
+#id_print_col11 td{
+    width: 20%;
+}
+#id_print_col12{
+    height: 6%;
+}
+
 #id_print_col7 td, #id_print_col8 td, #id_print_col10 td, #id_print_col14 td {
     width: 50%;
     border: 2px solid #ccc;
+}
+#id_print_col14 td{
+    border-bottom: none;
 }
 
 #id_print_col7 label, #id_print_col8 label, #id_print_col10 label, #id_print_col14 label{
     font-family: 'Roboto Mono', monospace;
 }
 
+#id_print_title1 table, #id_print_title2 table, #id_print_title3 table, #id_print_title4 table, #id_print_title5 table{
+    vertical-align: center;
+}
 #id_print_title1 td, #id_print_title2 td, #id_print_title3 td, #id_print_title4 td, #id_print_title5 td{
     text-align: center;
+    height: 3%;
+    font-size: 16px;
+    vertical-align: middle;
     color: white;
     background-color: #646464;
     border: solid #646464;
 }
+
