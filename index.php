@@ -2,11 +2,11 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <script src="calculator.php"></script>
+<!--    <script src="calculator.php"></script>-->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300&display=swap" rel="stylesheet">
     <title>Flugplan</title>

@@ -1,0 +1,61 @@
+html, body {
+    height: 92%;
+    font-family: 'Roboto', sans-serif;
+}
+
+#id_print_head {
+    text-align: center;
+    font-size: 40px;
+    margin: 6% auto 1%;
+    width: auto;
+}
+
+#id_print_border {
+    margin: 0 auto;
+    font-size: 14px;
+    border: solid #646464;
+    width: 90%;
+    height: 100%;
+}
+
+#id_print_border table {
+
+    border: 2px solid #ccc;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    border-bottom: none;
+}
+
+#id_print_border td {
+    vertical-align: top;
+    padding: 3px;
+    border: 2px solid #ccc;
+    border-bottom: none;
+}
+
+#id_print_border label {
+    color: #0c78d7;
+}
+
+#id_print_col5 td {
+    border: 2px solid #ccc;
+}
+#id_print_col7, #id_print_col8, #id_print_col10, #id_print_col14{
+    height: 10%;
+}
+#id_print_col7 td, #id_print_col8 td, #id_print_col10 td, #id_print_col14 td {
+    width: 50%;
+    border: 2px solid #ccc;
+}
+
+#id_print_col7 label, #id_print_col8 label, #id_print_col10 label, #id_print_col14 label{
+    font-family: 'Roboto Mono', monospace;
+}
+
+#id_print_title1 td, #id_print_title2 td, #id_print_title3 td, #id_print_title4 td, #id_print_title5 td{
+    text-align: center;
+    color: white;
+    background-color: #646464;
+    border: solid #646464;
+}
