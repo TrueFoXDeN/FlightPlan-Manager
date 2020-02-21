@@ -256,7 +256,7 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_star" name="list_star"></datalist>
 
 <div id="id_flugplan">
-    <form id="id_form_plan" method="post" action="php/print.php" target="_blank">
+    <form id="id_form_plan" method="post" action="php/print.php" target="_blank" autocomplete="off">
         <br>
         <fieldset id="id_fieldset_beforeflight">
             <legend id="id_fieldset_beforeflight_legend">Before flight</legend>

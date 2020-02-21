@@ -37,7 +37,7 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
 
 ?>
 <div id="id_calculator_frame">
-    <form id="id_calculator" method="post">
+    <form id="id_calculator" method="post" autocomplete="off">
         <table style="width: 100%" id="id_calculator_table">
             <tr>
                 <td style="width: 50%">Inital Block Fuel:</td>
