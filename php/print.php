@@ -4,7 +4,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <link href="css/print.css" rel="stylesheet" type="text/css">
+    <link href="../css/print.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300&display=swap" rel="stylesheet">
     <title>Flugplan</title>

@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="css/calculator.css" rel="stylesheet" type="text/css">
+    <link href="../css/calculator.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
@@ -59,7 +59,7 @@ if (isset($_POST['block_fuel_input']) && isset($_POST['pax_input']) && isset($_P
         <hr style="color: #ccc;border:none; border-bottom: 2px solid #ccc">
 
     </form>
-    <form action="index.php" id="id_calculator_res" method="post">
+    <form action="../index.php" id="id_calculator_res" method="post">
         <table style="width: 100%">
             <tr>
                 <td width="50%"><label class="noselect">Block Fuel:</label></td>

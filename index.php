@@ -220,13 +220,13 @@ if (isset($_POST['name_arrival_input'])) {
             obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
         }
     </script>
-    <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="calculator.php"
+    <iframe id="id_calculator_iframe" frameborder="0" scrolling="no" src="php/calculator.php"
                      onload="resizeIframe(this)"></iframe>
     <br><br>
     <div style="display: inline">
-        <iframe width="49%" id="id_sidfinder_iframe" frameborder="0" scrolling="no" src="sid_finder.php"
+        <iframe width="49%" id="id_sidfinder_iframe" frameborder="0" scrolling="no" src="php/sid_finder.php"
                 onload="resizeIframe(this)"></iframe>
-        <iframe width="49%" id="id_starfinder_iframe" frameborder="0" scrolling="no" src="star_finder.php"
+        <iframe width="49%" id="id_starfinder_iframe" frameborder="0" scrolling="no" src="php/star_finder.php"
                 onload="resizeIframe(this)"></iframe>
     </div>
 
@@ -256,7 +256,7 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_star" name="list_star"></datalist>
 
 <div id="id_flugplan">
-    <form id="id_form_plan" method="post" action="print.php" target="_blank">
+    <form id="id_form_plan" method="post" action="php/print.php" target="_blank">
         <br>
         <fieldset id="id_fieldset_beforeflight">
             <legend id="id_fieldset_beforeflight_legend">Before flight</legend>
