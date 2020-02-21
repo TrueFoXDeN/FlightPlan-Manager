@@ -148,7 +148,7 @@ if(isset($_POST['name_notes_arr'])){$notes_arr=$_POST['name_notes_arr'];}
     </table>
     <table id="id_print_col2">
         <tr>
-            <td>Callsing: <label><?php echo htmlspecialchars($callsign); ?></label></td>
+            <td>Callsign: <label><?php echo htmlspecialchars($callsign); ?></label></td>
             <td>Stand: <label><?php echo htmlspecialchars($stand_dep); ?></label></td>
             <td>Enroute Time: <label><?php echo htmlspecialchars($enroute_time); ?></label></td>
             <td>ATIS Info: <label><?php echo htmlspecialchars($atis_info_dep); ?></label></td>

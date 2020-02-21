@@ -250,7 +250,7 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_star" name="list_star"></datalist>
 
 <div id="id_flugplan">
-    <form id="id_form_plan" method="post" action="print.php">
+    <form id="id_form_plan" method="post" action="print.php" target="_blank">
         <br>
         <fieldset id="id_fieldset_beforeflight">
             <legend id="id_fieldset_beforeflight_legend">Before flight</legend>
@@ -259,7 +259,7 @@ if (isset($_POST['name_arrival_input'])) {
             DEP Apt: <input type="text" id="id_dep_apt" name="name_dep_apt" value="<?php echo @$DEP; ?>"/>
             ARR Apt: <input type="text" id="id_arr_apt" name="name_arr_apt" value="<?php echo @$ARR; ?>"/>
             ALTN Apt: <input type="text" id="id_altn_apt" name="name_alt_apt" value="<?php echo @$Alternate; ?>">
-            Callsign: <input type="text" id="id_calllsign" name="name_calllsign">
+            Callsign: <input type="text" id="id_calllsign" name="name_callsign">
             Stand: <input type="text" id="id_stand" name="name_stand_dep"><br><br>
             ACT Runways: <input type="text" id="id_act_rwys" name="name_act_runways">
             TA: <input type="text" id="id_ta" name="name_ta">
@@ -274,8 +274,8 @@ if (isset($_POST['name_arrival_input'])) {
             Block Fuel: <input type="text" id="id_block_fuel" name="name_blockfuel">
             ZFW: <input type="text" id="id_zfw" name="name_zfw">
             TOW: <input type="text" id="id_tow" name="name_tow">
-            Trip Fuel: <input type="text" id="id_tripfuel" name="name_trip_fuel" value="<?php echo @$Treibstoff; ?>">
-            Fuel Hours: <input type="text" id="id_fuel_hours" name="name_fuel_hours">
+            Trip Fuel: <input type="text" id="id_tripfuel" name="name_tripfuel" value="<?php echo @$Treibstoff; ?>">
+            Fuel Hours: <input type="text" id="id_fuel_hours" name="name_fuelhours">
             <br><br>
             ATIS Freq: <input type="text" list="list_atis_dep" id="id_atis_freq_dep" name="name_atis_freq_dep"
                               PLACEHOLDER="<?php echo @$NoAtis_DEP; ?>"
