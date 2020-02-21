@@ -84,11 +84,14 @@ if (isset($_POST['name_departure_input'])) {
     $DEP = strtoupper($DEP_temp);
     $_SESSION['DEP'] = $DEP;
     $DepartureReturn = sqlAbfrageDeparture($connect, $DEP);
-    $metar = new Metar(getMetar($DEP), FALSE, TRUE);
-    $parameters = $metar->parse();
-    $Dep_Temp = $parameters['temperature'] . ' °C';
-    $Dep_qnh = $parameters['barometer'];
-    $Dep_info = getMetar($DEP);
+    if(airportcheck($DEP)===true){
+        $metar = new Metar(getMetar($DEP), FALSE, TRUE);
+        $parameters = $metar->parse();
+        $Dep_Temp = $parameters['temperature'] . ' °C';
+        $Dep_qnh = $parameters['barometer'];
+        $Dep_info = getMetar($DEP);
+    }
+
     if (isset($DepartureReturn[0])) {
         $NoGround_DEP = $DepartureReturn[0];
     }
@@ -156,11 +159,14 @@ if (isset($_POST['name_arrival_input'])) {
     $ARR = strtoupper($ARR_temp);
     $_SESSION['ARR']= $ARR;
     $ArrivalReturn = sqlAbfrageArrival($connect, $ARR);
-    $metar = new Metar(getMetar($ARR), FALSE, TRUE);
-    $parameters = $metar->parse();
-    $Arr_Temp = $parameters['temperature'] . ' °C';
-    $Arr_qnh = $parameters['barometer'];
-    $Arr_notes = getMetar($ARR);
+    if(airportcheck($ARR)===true){
+        $metar = new Metar(getMetar($ARR), FALSE, TRUE);
+        $parameters = $metar->parse();
+        $Arr_Temp = $parameters['temperature'] . ' °C';
+        $Arr_qnh = $parameters['barometer'];
+        $Arr_notes = getMetar($ARR);
+    }
+
     $StarReturn = starLaden($Route, $ARR, $connect);
     if (isset($ArrivalReturn[0])) {
         $NoAtis_ARR = $ArrivalReturn[0];
@@ -798,6 +804,17 @@ function getMetar($ICAO)
     }
 //    echo $MetarString;
     return $MetarString;
+}
+
+function airportcheck($APT){
+    $sql="SELECT icao from airports where icao ='$APT'";
+    $result = $GLOBALS['connect'] ->query($sql);
+    if(mysqli_num_rows($result)!==0){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 $connect->close();
