@@ -250,43 +250,43 @@ if (isset($_POST['name_arrival_input'])) {
 <datalist id="list_star" name="list_star"></datalist>
 
 <div id="id_flugplan">
-    <form id="id_form_plan">
+    <form id="id_form_plan" method="post" action="print.php">
         <br>
         <fieldset id="id_fieldset_beforeflight">
             <legend id="id_fieldset_beforeflight_legend">Before flight</legend>
-            Date: <input type="text" id="id_date" value="<?php echo @$Date; ?>">
-            ETD: <input type="text" id="id_etd">
-            DEP Apt: <input type="text" id="id_dep_apt" value="<?php echo @$DEP; ?>"/>
-            ARR Apt: <input type="text" id="id_arr_apt" value="<?php echo @$ARR; ?>"/>
-            ALTN Apt: <input type="text" id="id_altn_apt" value="<?php echo @$Alternate; ?>">
-            Callsign: <input type="text" id="id_calllsign">
-            Stand: <input type="text" id="id_stand"><br><br>
-            ACT Runways: <input type="text" id="id_act_rwys">
-            TA: <input type="text" id="id_ta">
-            Cruise FL: <input type="text" id="id_cruise_fl">
-            ATIS Info: <input type="text" id="id_atis_info_dep">
-            QNH: <input type="text" id="id_qnh_dep" value="<?php echo @$Dep_qnh; ?>">
-            Temp: <input type="text" id="id_temp_dep" value="<?php echo @$Dep_Temp; ?>">
-            Enroute Time: <input type="text" id="id_enroute_time">
-            Pax: <input type="text" id="id_pax">
-            Cargo: <input type="text" id="id_cargo">
+            Date: <input type="text" id="id_date" name="name_date" value="<?php echo @$Date; ?>">
+            ETD: <input type="text" id="id_etd" name="name_etd">
+            DEP Apt: <input type="text" id="id_dep_apt" name="name_dep_apt" value="<?php echo @$DEP; ?>"/>
+            ARR Apt: <input type="text" id="id_arr_apt" name="name_arr_apt" value="<?php echo @$ARR; ?>"/>
+            ALTN Apt: <input type="text" id="id_altn_apt" name="name_alt_apt" value="<?php echo @$Alternate; ?>">
+            Callsign: <input type="text" id="id_calllsign" name="name_calllsign">
+            Stand: <input type="text" id="id_stand" name="name_stand_dep"><br><br>
+            ACT Runways: <input type="text" id="id_act_rwys" name="name_act_runways">
+            TA: <input type="text" id="id_ta" name="name_ta">
+            Cruise FL: <input type="text" id="id_cruise_fl" name="name_cruise_fl">
+            ATIS Info: <input type="text" id="id_atis_info_dep" name="name_atis_info_dep">
+            QNH: <input type="text" id="id_qnh_dep" name="name_qnh_dep" value="<?php echo @$Dep_qnh; ?>">
+            Temp: <input type="text" id="id_temp_dep" name="name_temp_dep" value="<?php echo @$Dep_Temp; ?>">
+            Enroute Time: <input type="text" id="id_enroute_time" name="name_enroute_time">
+            Pax: <input type="text" id="id_pax" name="name_pax">
+            Cargo: <input type="text" id="id_cargo" name="name_cargo">
             <br><br>
-            Block Fuel: <input type="text" id="id_block_fuel">
-            ZFW: <input type="text" id="id_zfw">
-            TOW: <input type="text" id="id_tow">
-            Trip Fuel: <input type="text" id="id_tripfuel" value="<?php echo @$Treibstoff; ?>">
-            Fuel Hours: <input type="text" id="id_fuel_hours">
+            Block Fuel: <input type="text" id="id_block_fuel" name="name_blockfuel">
+            ZFW: <input type="text" id="id_zfw" name="name_zfw">
+            TOW: <input type="text" id="id_tow" name="name_tow">
+            Trip Fuel: <input type="text" id="id_tripfuel" name="name_trip_fuel" value="<?php echo @$Treibstoff; ?>">
+            Fuel Hours: <input type="text" id="id_fuel_hours" name="name_fuel_hours">
             <br><br>
-            ATIS Freq: <input type="text" list="list_atis_dep" id="id_atis_freq_dep"
+            ATIS Freq: <input type="text" list="list_atis_dep" id="id_atis_freq_dep" name="name_atis_freq_dep"
                               PLACEHOLDER="<?php echo @$NoAtis_DEP; ?>"
                               value="<?php echo @$Atis_DEP_value; ?>">
-            Delivery Freq: <input type="text" list="list_delivery_dep" id="id_delivery_freq"
+            Delivery Freq: <input type="text" list="list_delivery_dep" id="id_delivery_freq" name="name_delivery_freq"
                                   PLACEHOLDER="<?php echo @$NoDelivery_DEP; ?>" value="<?php echo @$Del_DEP_value; ?>">
-            Ground 1 Freq: <input list="list_ground_dep" type="text" id="id_gnd_1_freq_dep"
+            Ground 1 Freq: <input list="list_ground_dep" type="text" id="id_gnd_1_freq_dep" name="name_gnd_1_freq_dep"
                                   PLACEHOLDER="<?php echo @$NoGround_DEP; ?>" value="<?php echo @$Ground_DEP_value; ?>">
-            Ground 2 Freq: <input list="list_ground_dep" type="text" id="id_gnd_2_freq_dep"
+            Ground 2 Freq: <input list="list_ground_dep" type="text" id="id_gnd_2_freq_dep" name="name_gnd_2_freq_dep"
                                   PLACEHOLDER="<?php echo @$NoGround_DEP; ?>" value="<?php echo @$Ground_DEP_value; ?>">
-            Tower Freq: <input type="text" list="list_tower_dep" id="id_twr_freq_dep"
+            Tower Freq: <input type="text" list="list_tower_dep" id="id_twr_freq_dep" name="name_twr_freq_dep"
                                PLACEHOLDER="<?php echo @$NoTower_DEP; ?>"
                                value="<?php echo @$Tower_DEP_value; ?>">
 
@@ -296,13 +296,13 @@ if (isset($_POST['name_arrival_input'])) {
         <fieldset>
             <legend>ATC Clearance</legend>
             SID: <input type="text" id="id_sid" list="list_sid" placeholder="<?php echo @$NoSid; ?>"
-                        value="<?php echo @$Sid_value; ?>">
+                        value="<?php echo @$Sid_value; ?>" name="name_sid">
             RWY: <input type="text" id="id_rwy_takeoff" list="list_rwy_dep" placeholder="<?php echo @$NoRwy_DEP; ?>"
-                        value="<?php echo @$Rwy_DEP_value; ?>">
-            Init CLB: <input type="text" id="id_init_clb">
-            Squawk: <input type="text" id="id_squawk">
+                        value="<?php echo @$Rwy_DEP_value; ?>" name="name_rwy_takeoff">
+            Init CLB: <input type="text" id="id_init_clb" name="name_init_climb">
+            Squawk: <input type="text" id="id_squawk" name="name_squawk">
             <br><br>
-            <textarea id="id_further_information"
+            <textarea id="id_further_information" name="name_further_information"
                       placeholder="Further Information:"><?php echo htmlspecialchars($Dep_info); ?></textarea>
             <textarea id="id_route" name="name_route"
                       placeholder="Route:"><?php echo htmlspecialchars($Route); ?></textarea>
@@ -312,58 +312,58 @@ if (isset($_POST['name_arrival_input'])) {
             <legend>Taxi</legend>
             Time: <input type="text" id="id_taxi_time">
             <br><br>
-            <textarea id="id_taxi_route" placeholder="Taxiroute:"></textarea>
+            <textarea id="id_taxi_route" name="name_taxi_route" placeholder="Taxiroute:"></textarea>
         </fieldset>
         <br>
         <fieldset>
             <legend>Takeoff</legend>
-            Time: <input type="text" id="id_takeoff_time">
-            Approach Freq: <input type="text" id="id_dep_freq" list="list_approach_DEP"
+            Time: <input type="text" id="id_takeoff_time" name="name_takeoff_time">
+            Approach Freq: <input type="text" id="id_dep_freq" list="list_approach_DEP" name="name_dep_freq"
                                   placeholder="<?php echo @$NoApproach_DEP; ?>"
                                   value="<?php echo @$Approach_DEP_value; ?>">
-            Radar 1: <input type="text" id="id_rdr_1_freq">
-            Radar 2: <input type="text" id="id_rdr_2_freq">
-            Radar 3: <input type="text" id="id_rdr_3_freq">
-            Radar 4: <input type="text" id="id_rdr_4_freq">
+            Radar 1: <input type="text" id="id_rdr_1_freq" name="name_rdr_1_freq">
+            Radar 2: <input type="text" id="id_rdr_2_freq" name="name_rdr_2_freq">
+            Radar 3: <input type="text" id="id_rdr_3_freq" name="name_rdr_3_freq">
+            Radar 4: <input type="text" id="id_rdr_4_freq" name="name_rdr_4_freq">
             <br> <br>
-            <textarea id="id_notes_dep" placeholder="Notizen:"></textarea>
+            <textarea id="id_notes_dep" placeholder="Notizen:" name="name_notes_dep"></textarea>
         </fieldset>
         <br>
         <fieldset>
             <legend>Descending, landing, taxiing</legend>
-            Time: <input type="text" id="id_time_landing">
-            Runway: <input type="text" id="id_rwy_landing" list="list_rwy_arr" placeholder="<?php echo @$NoRwy_ARR; ?>"
+            Time: <input type="text" id="id_time_landing" name="name_time_landing">
+            Runway: <input type="text" id="id_rwy_landing" name="name_rwy_landing" list="list_rwy_arr" placeholder="<?php echo @$NoRwy_ARR; ?>"
                            value="<?php echo @$Rwy_ARR_value; ?>">
-            STAR: <input type="text" id="id_star" list="list_star" placeholder="<?php echo @$NoStar; ?>"
+            STAR: <input type="text" id="id_star" name="name_star" list="list_star" placeholder="<?php echo @$NoStar; ?>"
                          value="<?php echo @$Star_value; ?>">
-            Approach: <input type="text" id="id_approach">
-            Stand: <input type="text" id="id_stand_arr">
+            Approach: <input type="text" id="id_approach" name="name_approach">
+            Stand: <input type="text" id="id_stand_arr" name="name_stand_arr">
             <br><br>
-            ATIS Freq: <input type="text" id="id_atis_freq_arr" list="list_atis_arr"
+            ATIS Freq: <input type="text" id="id_atis_freq_arr" name="name_atis_freq_arr" list="list_atis_arr"
                               placeholder="<?php echo @$NoAtis_ARR; ?>"
                               value="<?php echo @$Atis_ARR_value; ?>">
-            Approach Freq: <input type="text" id="id_app_freq_arr" list="list_approach_arr"
+            Approach Freq: <input type="text" id="id_app_freq_arr" name="name_app_freq_arr" list="list_approach_arr"
                                   placeholder="<?php echo @$NoApproach_ARR; ?>"
                                   value="<?php echo @$Approach_ARR_value; ?>">
-            Tower Freq: <input type="text" id="id_twr_freq_arr" list="list_tower_arr"
+            Tower Freq: <input type="text" id="id_twr_freq_arr" name="name_twr_freq_arr" list="list_tower_arr"
                                placeholder="<?php echo @$NoTower_ARR; ?>"
                                value="<?php echo @$Tower_ARR_value; ?>">
-            Ground 1: <input type="text" id="id_gnd_1_freq_arr" list="list_ground_arr"
+            Ground 1: <input type="text" id="id_gnd_1_freq_arr" name="name_gnd_1_freq_arr" list="list_ground_arr"
                              placeholder="<?php echo @$NoGround_ARR; ?>" value="<?php echo @$Ground_ARR_value; ?>">
-            Ground 2: <input type="text" id="id_gnd_2_freq_arr" list="list_ground_arr"
+            Ground 2: <input type="text" id="id_gnd_2_freq_arr" name="name_gnd_2_freq_arr" list="list_ground_arr"
                              placeholder="<?php echo @$NoGround_ARR; ?>" value="<?php echo @$Ground_ARR_value; ?>">
             <br><br>
-            QNH: <input type="text" id="id_qnh_arr" value="<?php echo @$Arr_qnh; ?>">
-            Active Runways: <input type="text" id="id_act_rwys_arr">
-            Temp: <input type="text" id="id_temp_arr" value="<?php echo @$Arr_Temp; ?>">
-            Transition Level: <input type="text" id="id_tl">
-            ATIS Info: <input type="text" id="id_atis_info_arr">
+            QNH: <input type="text" id="id_qnh_arr" name="name_qnh_arr" value="<?php echo @$Arr_qnh; ?>">
+            Active Runways: <input type="text" id="id_act_rwys_arr" name="name_act_rwys_arr">
+            Temp: <input type="text" id="id_temp_arr" name="name_temp_arr"value="<?php echo @$Arr_Temp; ?>">
+            Transition Level: <input type="text" id="id_tl" name="name_tl">
+            ATIS Info: <input type="text" id="id_atis_info_arr" name="name_atis_info_arr">
             <br><br>
-            <textarea id="id_notes_arr" placeholder="Notizen:"><?php echo htmlspecialchars($Arr_notes); ?></textarea>
+            <textarea id="id_notes_arr" name="name_notes_arr" placeholder="Notizen:"><?php echo htmlspecialchars($Arr_notes); ?></textarea>
 
         </fieldset>
         <br>
-
+        <input type="submit" value="Drucken">
     </form>
 </div>
 
