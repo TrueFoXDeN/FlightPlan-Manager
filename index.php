@@ -71,6 +71,8 @@ $Dep_info = '';
 $Arr_Temp = '';
 $Arr_qnh = '';
 $Arr_notes = '';
+$flightlevel = '';
+$Enroutetime = '';
 
 
 $Date = date('d/m/Y ');
@@ -139,6 +141,8 @@ if (isset($_POST['name_departure_input'])) {
         $Alternate = alternateLaden($DEP, $ARR, $connect);
         $SidReturn = sidLaden($Route, $DEP, $connect);
         $StarReturn = starLaden($Route, $ARR, $connect);
+        $flightlevel = getFlightlevel($DEP, $ARR);
+        $Enroutetime = getEnroutetime($DEP, $ARR);
         if (isset($SidReturn[0])) {
             $NoSid = $SidReturn[0];
         }
@@ -269,11 +273,11 @@ if (isset($_POST['name_arrival_input'])) {
             Stand: <input type="text" id="id_stand" name="name_stand_dep"><br><br>
             ACT Runways: <input type="text" id="id_act_rwys" name="name_act_runways">
             TA: <input type="text" id="id_ta" name="name_ta">
-            Cruise FL: <input type="text" id="id_cruise_fl" name="name_cruise_fl">
+            Cruise FL: <input type="text" id="id_cruise_fl" name="name_cruise_fl" value="<?php echo@$flightlevel;?>">
             ATIS Info: <input type="text" id="id_atis_info_dep" name="name_atis_info_dep">
             QNH: <input type="text" id="id_qnh_dep" name="name_qnh_dep" value="<?php echo @$Dep_qnh; ?>">
             Temp: <input type="text" id="id_temp_dep" name="name_temp_dep" value="<?php echo @$Dep_Temp; ?>">
-            Enroute Time: <input type="text" id="id_enroute_time" name="name_enroute_time">
+            Enroute Time: <input type="text" id="id_enroute_time" name="name_enroute_time" value="<?php echo@$Enroutetime;?>">
             Pax: <input type="text" id="id_pax" name="name_pax">
             Cargo: <input type="text" id="id_cargo" name="name_cargo">
             <br><br>
@@ -816,6 +820,31 @@ function airportcheck($APT){
         return false;
     }
 }
+
+function getFlightlevel($DEP, $ARR){
+    $sql = "SELECT flightlevel from routen where start_flughafen = '$DEP' and ziel_flughafen = '$ARR'";
+    $result = $GLOBALS['connect'] -> query($sql);
+    $row = $result ->fetch_assoc();
+    if(mysqli_num_rows($result)!==0){
+        return  $row['flightlevel'];
+    }else
+    {
+        return '';
+    }
+}
+function getEnroutetime($DEP, $ARR){
+    $sql = "SELECT enroute_time from routen where start_flughafen = '$DEP' and ziel_flughafen = '$ARR'";
+    $result = $GLOBALS['connect'] -> query($sql);
+    $row = $result ->fetch_assoc();
+    if(mysqli_num_rows($result)!==0){
+        return  $row['enroute_time'];
+    }else
+    {
+        return '';
+    }
+
+}
+
 
 $connect->close();
 ?>

@@ -21,6 +21,7 @@ $placeholder_sid = '';
 $placeholder_waypoint = '';
 $placeholder_runway = '';
 $isChecked = 'false';
+
 connectToDB();
 
 if (isset($_SESSION['ARR'])) {
